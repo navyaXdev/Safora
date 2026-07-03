@@ -10,8 +10,12 @@ function App() {
     reasons: ["everything is good", "no malware detected"]
   });
   const [dataReceived,setDataReceived] = useState(false);
+  const [isValidUrl,setIsValidUrl] = useState(null);
   const handleCheckLink = async () => {
     try {
+      const valid = validateUrl(url);
+      setIsValidUrl(valid);
+      if(valid===false) return;
       setIsLoading(true);
       console.log("Sending data to the backend")
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/predict`,{
@@ -35,7 +39,15 @@ function App() {
 
   const handleChange = (e)=>{
     setUrl(e.target.value);
+  }
 
+  const validateUrl = (value)=>{
+    try {
+      new URL(value);
+      return true;
+    } catch (error) {
+      return false
+    }
   }
 
   const getRiskStyles = (riskScore) => {
@@ -75,13 +87,17 @@ function App() {
 
   return (
     <div className="w-80 bg-zinc-900 text-zinc-100 p-4 font-sans">
-      <h1 className="flex items-center gap-2 text-base font-semibold mb-3">
+      <h1 className="flex items-center gap-2 text-base font-semibold mb-3 ">
         🛡️ CyberX
       </h1>
 
-      <p className="text-xs text-zinc-400 mb-2">
+      <p className="text-xs text-zinc-400 mb-2 ">
         Paste a link to check it before you click.
       </p>
+
+      {isValidUrl===false && <div className="show-error mb-2 text-xs text-red-400">* Please enter a valid url</div>}
+
+
 
       <textarea
       onChange={handleChange}
