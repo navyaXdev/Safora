@@ -25,15 +25,15 @@
     "action": {
         "default_popup": "index.html",
         "default_icon": {
-            "16": "images/CyberXLogo2.png",
-            "48": "images/cyberXLogo2.png",
-            "128": "images/cyberXLogo2.png"
+            "16": "images/Safora.png",
+            "48": "images/Safora.png",
+            "128": "images/Safora.png"
         }
     },
     "icons": {
-        "16": "images/cyberXLogo2.png",
-        "48": "images/cyberXLogo2.png",
-        "128": "images/cyberXLogo2.png"
+        "16": "images/Safora.png",
+        "48": "images/Safora.png",
+        "128": "images/Safora.png"
     },
     "background": {
         "service_worker": "background.js"
