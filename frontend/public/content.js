@@ -1,20 +1,23 @@
 chrome.runtime.onMessage.addListener((message) => {
-    if (message.type !== "SCAN_RESULT") return;
-    console.log("the message received is: ", message)
+    if (message.type === "SCAN_RESULT") {
+        console.log("the message received is: ", message);
+        // const { risk_score, label, reasons } = message.data;
+        const tier = getRiskTier(message.data.risk_score);
 
-    // const { risk_score, label, reasons } = message.data;
-    const tier = getRiskTier(message.data.risk_score);
+        removeExisting();
 
-    removeExisting();
-
-    if (tier === "high") {
-        showFullWarning(message.data, tier);
+        if (tier === "high") {
+            showFullWarning(message.data, tier);
+        } else if (tier === "medium" || tier === "low") {
+            showBanner(message.data, tier);
+        }
     }
-    else if (tier === "medium" || tier === "low") {
-        showBanner(message.data, tier);
-    }
 
-})
+    if (message.type === "CONTEXT_CHECK_RESULT") {
+        console.log("i'm inside the CONTEXT_CHECK_RESULT");
+        showContextCheckToast(message, message.url);
+    }
+});
 
 function removeExisting() {
     const overlay = document.getElementById("cyberX-overlay");
@@ -25,7 +28,7 @@ function removeExisting() {
 
 function showFullWarning(data, tier) {
     const element = document.createElement("div");
-    element.id = "cyberX-overlay"
+    element.id = "cyberX-overlay";
     const cfg = TIER_CONFIG[tier];
     const hasReasons = Array.isArray(data.reasons) && data.reasons.length > 0;
     const reasonsHtml = hasReasons
@@ -44,7 +47,7 @@ function showFullWarning(data, tier) {
         <div style="font-size:48px;margin-bottom:8px;">\u26A0\uFE0F</div>
         <h1 style="font-size:22px;margin:0 0 8px;">This site looks like a scam</h1>
         <p style="color:#a1a1aa;margin:0 0 4px;font-size:14px;">
-          Detected as <strong style="color:${cfg.color};">${escapeHtml(data.label)}</strong>
+          Detected as <strong style="color:${cfg.color};">${escapeHtml(tier)}</strong>
           &middot; risk score ${Math.round(data.risk_score * 100)}%
         </p>
         ${reasonsHtml}
@@ -60,19 +63,17 @@ function showFullWarning(data, tier) {
           </button>
         </div>
       </div>
-        </div>`
+        </div>`;
 
     document.documentElement.appendChild(element);
     document.getElementById("cyberX-leave").addEventListener("click", () => {
-        window.location.href = "https://www.google.com"
-    })
+        window.location.href = "https://www.google.com";
+    });
 
     document.getElementById("cyberX-proceed").addEventListener("click", () => {
         element.remove();
-    })
-
+    });
 }
-
 
 function showBanner(data, tier) {
     const cfg = TIER_CONFIG[tier];
@@ -95,7 +96,7 @@ function showBanner(data, tier) {
     gap:12px;
     font-size:14px;">
       <span>\u26A0\uFE0F ${tier === "medium" ? "This site looks a little suspicious" : "This site has a minor risk flag"} (${Math.round(
-        data.risk_score * 100
+        data.risk_score * 100,
     )}% risk). Be careful entering personal info.</span>
       <button id="cyberX-dismiss" style="
       background:rgba(0,0,0,0.15);
@@ -111,12 +112,100 @@ function showBanner(data, tier) {
     document.documentElement.appendChild(banner);
     document.getElementById("cyberX-dismiss").addEventListener("click", () => {
         banner.remove();
-    })
-
+    });
 }
 
 function escapeHtml(str) {
     const element = document.createElement("div");
     element.textContent = str;
     return element.innerHTML;
+}
+
+function showContextCheckToast(message, url) {
+    // message:{
+    //     type:,
+    //     url:,
+    //     result:{
+    //         data:{},
+    //         ok:
+    //     }
+    // }
+    const result = message.result;
+    console.log(
+        "the data in the content.js with context menu has been received: ",
+        result,
+    );
+    const exists = document.getElementById("cyberX-context-toast");
+    if (exists) exists.remove();
+
+    const contextDiv = document.createElement("div");
+    contextDiv.id = "cyberX-context-toast";
+
+    let inner;
+    if (!result.data || !result.ok) {
+        inner = `<p style="margin:0;font-size:13px;">Couldn't check that link right now.</p>`;
+    } else {
+        const tier = getRiskTier(result.data.risk_score);
+        const cfg = TIER_CONFIG[tier];
+
+        const reasons =
+            Array.isArray(result.data.reasons) && result.data.reasons.length > 0
+                ? `<div style="margin-top: 10px; border-top: 1px solid #27272a; padding-top: 8px;">
+            <p style="margin: 0 0 6px; font-size: 11px; font-weight: 600; text-transform: uppercase; tracking-wider; color: #71717a;">Details</p>
+            <ul style="margin: 0; padding: 0; list-style: none; font-size: 12px; color: #d4d4d8; display: flex; flex-direction: column; gap: 6px;">
+                ${result.data.reasons
+                    .map(
+                        (r) => `
+                        <li style="display: flex; align-items: flex-start; gap: 8px; line-height: 1.4;">
+                            <span style="display: inline-block; width: 5px; height: 5px; background: #52525b; border-radius: 50%; margin-top: 6px; flex-shrink: 0;"></span>
+                            <span style="flex: 1;">${escapeHtml(r)}</span>
+                        </li>
+                    `,
+                    )
+                    .join("")}
+            </ul>
+           </div>`
+                : "";
+
+        inner = `
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px;">
+    <p style="margin: 0; font-size: 13px; font-weight: 600; color: #fff; display: flex; align-items: center; gap: 6px;">
+      ${cfg.text} <span style="color: ${cfg.color}; font-weight: 700;">${escapeHtml(tier)}</span>
+    </p>
+
+    <div style="display:flex; align-items:center; gap:8px;" >
+    <span style="font-size: 11px; font-weight: 700; background: ${cfg.color}15; color: ${cfg.color}; border: 1px solid ${cfg.color}30; padding: 2px 6px; border-radius: 6px; white-space: nowrap;">
+      ${Math.round(result.data.risk_score * 100)}% risk
+    </span>
+
+     <div id="close-context-div" style="
+  font-size: medium; 
+  cursor: pointer;  ">x</div>
+    </div>
+
+  </div>
+  <p style="margin: 0; font-size: 11px; color: #a1a1aa; word-break: break-all; opacity: 0.8; line-height: 1.4;">
+    ${escapeHtml(url)}
+  </p>
+  ${reasons}`;
+
+        contextDiv.innerHTML = `
+            <div style="position: fixed; top: 20px; right: 20px; z-index: 2147483647;
+            width: 300px; box-sizing: border-box; background: #121214; 
+            border: 1px solid #27272a; border-radius: 12px; padding: 14px; 
+            color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            box-shadow: 0 12px 32px -4px rgba(0,0,0,0.6), 0 4px 12px -2px rgba(0,0,0,0.4);
+            transition: all 0.2s ease;">
+            
+             ${inner}
+            </div>`;
+
+        document.documentElement.appendChild(contextDiv);
+        document.querySelector("#close-context-div").addEventListener("click", () => {
+            contextDiv.remove();
+        })
+        setTimeout(() => {
+            contextDiv.remove();
+        }, 8000);
+    }
 }

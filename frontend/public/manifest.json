@@ -19,7 +19,8 @@
         "activeTab",
         "storage",
         "webNavigation",
-        "scripting"
+        "scripting",
+        "contextMenus"
     ],
     "action": {
         "default_popup": "index.html",
