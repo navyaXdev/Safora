@@ -181,96 +181,100 @@ const ShowUrlCard = ({ setShowTheUrl, isDarkMode}) => {
 
     return (
         <div
-            className={`w-95 rounded-[20px] p-8 text-center shadow-lg ${isDarkMode
-                ? "bg-zinc-900 text-white"
-                : "bg-white text-zinc-900"
-                }`}
-        >
-            <h1
-                className={`mb-2 text-xl font-bold ${isDarkMode ? "text-white" : "text-zinc-900"
-                    }`}
-            >
-                Check a URL
-            </h1>
+    className={`w-95 rounded-[20px] p-8 text-center shadow-lg ${
+        isDarkMode ? "bg-zinc-900 text-white" : "bg-white text-zinc-900"
+    }`}
+>
+    <h1 className={`mb-2 text-xl font-bold ${isDarkMode ? "text-white" : "text-zinc-900"}`}>
+        Check a URL
+    </h1>
 
-            <p
-                className={`mb-6 text-sm ${isDarkMode ? "text-zinc-400" : "text-zinc-500"
-                    }`}
-            >
-                Paste a link to see if it's safe.
-            </p>
+    <p className={`mb-6 text-sm ${isDarkMode ? "text-zinc-400" : "text-zinc-500"}`}>
+        Paste a link to see if it's safe.
+    </p>
 
-            <div className="relative mb-6">
-                <span className="absolute top-1/2 left-3 -translate-y-1/2 text-zinc-400">
-                    🔗
-                </span>
+    {/* Input & Error Handling Container */}
+    <div className="relative mb-6 text-left">
+        <span className="absolute top-[26px] left-3 -translate-y-1/2 text-zinc-400">
+            🔗
+        </span>
 
-                <input
-                    type="text"
-                    placeholder="https://example.com"
-                    value={url}
-                    onChange={handleChange}
-                    className={`w-full rounded-xl border py-3 pr-3 pl-10 outline-none transition ${isDarkMode
+        <input
+            type="text"
+            placeholder="https://example.com"
+            value={url}
+            onChange={handleChange}
+            className={`w-full rounded-xl border py-3 pr-3 pl-10 outline-none transition ${
+                isValidUrl === false
+                    ? "border-red-500 bg-red-500/5 text-red-900 dark:text-red-200 focus:border-red-500"
+                    : isDarkMode
                         ? "border-zinc-700 bg-zinc-800 text-white placeholder:text-zinc-500 focus:border-emerald-500"
                         : "border-zinc-200 bg-white text-zinc-900 placeholder:text-zinc-400 focus:border-emerald-600"
-                        }`}
-                />
+            }`}
+        />
+
+        {/* Clean, Non-intrusive Error Message */}
+        {isValidUrl===false && (
+            <div className="mt-2 flex items-center gap-1.5 text-xs font-medium text-red-500 animate-fade-in">
+                <span>⚠️</span> Please enter a valid URL
+            </div>
+        )}
+    </div>
+
+    <button
+        onClick={handleCheckLink}
+        className="mb-5 w-full rounded-xl bg-green-700 py-3.5 font-semibold text-white transition hover:bg-green-800"
+    >
+        Check Safety
+    </button>
+
+    <button
+        onClick={() => setShowTheUrl(false)}
+        className={`text-sm font-medium transition ${
+            isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-500 hover:text-zinc-700"
+        }`}
+    >
+        Back to protection status
+    </button>
+
+    {dataReceived && (
+        <div className={`mt-4 rounded-xl border p-3.5 transition-all duration-300 ${styles.bg}`}>
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-2.5 mb-2.5">
+                <span className="text-xs font-medium uppercase tracking-wider text-zinc-400">
+                    Analysis Result
+                </span>
+                <span className={`text-xs px-2 py-0.5 rounded-full border font-semibold ${styles.badge}`}>
+                    {styles.label}
+                </span>
             </div>
 
-            <button
-                onClick={handleCheckLink}
-                className="mb-5 w-full rounded-xl bg-green-700 py-3.5 font-semibold text-white transition hover:bg-green-800"
-            >
-                Check Safety
-            </button>
+            <div className="flex justify-between items-baseline mb-3">
+                <span className="text-xs text-zinc-400">Risk Score</span>
+                <span className={`text-xl font-bold tracking-tight ${styles.text}`}>
+                    {Math.round(data.risk_score * 100)}%
+                </span>
+            </div>
 
-            <button
-                onClick={() => setShowTheUrl(false)}
-                className={`text-sm font-medium transition ${isDarkMode
-                    ? "text-zinc-400 hover:text-white"
-                    : "text-zinc-500 hover:text-zinc-700"
-                    }`}
-            >
-                Back to protection status
-            </button>
-
-
-            {dataReceived && (
-                <div className={`mt-4 rounded-xl border p-3.5 transition-all duration-300 ${styles.bg}`}>
-                    <div className="flex items-center justify-between border-b border-zinc-800 pb-2.5 mb-2.5">
-                        <span className="text-xs font-medium uppercase tracking-wider text-zinc-400">Analysis Result</span>
-                        <span className={`text-xs px-2 py-0.5 rounded-full border font-semibold ${styles.badge}`}>
-                            {styles.label}
-                        </span>
-                    </div>
-
-                    <div className="flex justify-between items-baseline mb-3">
-                        <span className="text-xs text-zinc-400">Risk Score</span>
-                        <span className={`text-xl font-bold tracking-tight ${styles.text}`}>
-                            {Math.round(data.risk_score * 100)}%
-                        </span>
-                    </div>
-
-                    {data.reasons && data.reasons.length > 0 && (
-                        <div className="space-y-1.5">
-                            <span className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider block">Details:</span>
-                            <ul className="space-y-1">
-                                {data.reasons.map((reason, index) => (
-                                    <li key={index} className="text-xs text-zinc-300 flex items-start  gap-1.5 leading-relaxed">
-                                        <span className={`mt-1.5 h-1 w-1 shrink-0 rounded-full bg-zinc-500 translate-y-0.5`} />
-                                        <p className=" flex justify-center items-center" >
-
-                                            {reason}
-                                        </p>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
+            {data.reasons && data.reasons.length > 0 && (
+                <div className="space-y-1.5">
+                    <span className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider block">
+                        Details:
+                    </span>
+                    <ul className="space-y-1">
+                        {data.reasons.map((reason, index) => (
+                            <li key={index} className="text-xs text-zinc-300 flex items-start gap-1.5 leading-relaxed">
+                                <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-zinc-500 translate-y-0.5" />
+                                <p className="flex justify-center items-center">
+                                    {reason}
+                                </p>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             )}
-
         </div>
+    )}
+</div>
     );
 };
 

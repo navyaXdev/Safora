@@ -33,7 +33,7 @@ function App() {
     //     Paste a link to check it before you click.
     //   </p>
 
-    //   {isValidUrl===false && <div className="show-error mb-2 text-xs text-red-400">* Please enter a valid url</div>}
+      
     //   {maxLengthExceeded && <div className="show-error mb-2 text-xs text-red-400">* Please enter a shorter url</div>}
 
 
