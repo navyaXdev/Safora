@@ -1,5 +1,5 @@
 
-const API_URL = 'http://localhost:3000/predict'
+const API_URL = 'https://safora.onrender.com/predict'
 
 function getRiskTier(riskScore){
     if (riskScore >= 0.7) return 'high';
