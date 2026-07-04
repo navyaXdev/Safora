@@ -195,7 +195,7 @@ const ShowUrlCard = ({ setShowTheUrl, isDarkMode}) => {
 
     {/* Input & Error Handling Container */}
     <div className="relative mb-6 text-left">
-        <span className="absolute top-[26px] left-3 -translate-y-1/2 text-zinc-400">
+        <span className="absolute top-6 left-3 -translate-y-1/2 text-zinc-400">
             🔗
         </span>
 
