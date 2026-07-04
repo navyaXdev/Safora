@@ -11,6 +11,7 @@ function App() {
   });
   const [dataReceived,setDataReceived] = useState(false);
   const [isValidUrl,setIsValidUrl] = useState(null);
+  const[maxLengthExceeded,setMaxLengthExceeded] = useState(false);
   const handleCheckLink = async () => {
     try {
       const valid = validateUrl(url);
@@ -39,6 +40,8 @@ function App() {
 
   const handleChange = (e)=>{
     setUrl(e.target.value);
+    if(maxLengthExceeded && e.target.value.length<=2000) setMaxLengthExceeded(false);
+    if(e.target.value.length>2000) setMaxLengthExceeded(true)
   }
 
   const validateUrl = (value)=>{
@@ -96,7 +99,7 @@ function App() {
       </p>
 
       {isValidUrl===false && <div className="show-error mb-2 text-xs text-red-400">* Please enter a valid url</div>}
-
+      {maxLengthExceeded && <div className="show-error mb-2 text-xs text-red-400">* Please enter a shorter url</div>}
 
 
       <textarea
