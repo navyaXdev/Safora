@@ -96,7 +96,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
     if (info.menuItemId !== "cyberX-check-link" || !info.linkUrl) return;
-
+    
     const result = await checkUrlManual(info.linkUrl);
     chrome.tabs.sendMessage(tab.id, {
         type: "CONTEXT_CHECK_RESULT",
