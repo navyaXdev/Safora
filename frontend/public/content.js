@@ -267,7 +267,7 @@ document.addEventListener("focusin", (e) => {
   
   <p style="color:#a1a1aa;margin:0 0 24px;font-size:14px;line-height:1.5;">
     You're about to enter a ${fieldName[fieldType] || "information"} 
-    on a site cyberX doesn't trust. Only continue if you're sure this is legitimate.
+    on a site Safora doesn't trust. Only continue if you're sure this is legitimate.
   </p>
   
   <div style="display:flex;justify-content:center;">

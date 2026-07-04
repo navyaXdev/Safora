@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "CyberX",
+    "name": "Safora",
     "description": "Detects phishing and scam websites in real time and explains the risk in plain language.",
     "version": "1.0",
     "content_scripts": [

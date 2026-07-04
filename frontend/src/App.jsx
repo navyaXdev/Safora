@@ -88,7 +88,7 @@ function App() {
   return (
     <div className="w-80 bg-zinc-900 text-zinc-100 p-4 font-sans">
       <h1 className="flex items-center gap-2 text-base font-semibold mb-3 ">
-        🛡️ CyberX
+        <img className="w-12 h-12" src="images/image2.png" alt="safora-logo" /> Safora
       </h1>
 
       <p className="text-xs text-zinc-400 mb-2 ">
