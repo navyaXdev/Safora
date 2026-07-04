@@ -1,8 +1,7 @@
 import { React,useState } from "react";
 
 
-const SaforaDashboard = ({setShowTheUrl}) => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
+const SaforaDashboard = ({setShowTheUrl,isDarkMode,setIsDarkMode}) => {
 
     return (
         <div

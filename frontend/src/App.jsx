@@ -5,99 +5,22 @@ import ShowUrlCard from "./components/ShowUrlCard";
 function App() {
 
   // const [isLoading, setIsLoading] = useState();
-  // const [url,setUrl] = useState("");
-  // const [data,setData] = useState({
-  //   risk_score: 0,
-  //   label: "safe",
-  //   reasons: ["everything is good", "no malware detected"]
-  // });
-  // const [dataReceived,setDataReceived] = useState(false);
-  // const [isValidUrl,setIsValidUrl] = useState(null);
-  // const[maxLengthExceeded,setMaxLengthExceeded] = useState(false);
-  
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
-  // const handleCheckLink = async () => {
-  //   try {
-  //     const valid = validateUrl(url);
-  //     setIsValidUrl(valid);
-  //     if(valid===false) return;
-  //     setIsLoading(true);
-  //     console.log("Sending data to the backend")
-  //     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/predict`,{
-  //       method:'POST',
-  //       headers:{
-  //         "Content-Type":"application/json"
-  //       },
-  //       body:JSON.stringify({url})
-  //     })
-  //     const data = await response.json();
-  //     setData(data)
-  //     setDataReceived(true)
-  //     console.log("The data was sent to the backend and in response we got: ", data);
-  //     console.log("The url is: ",url);
-  //   } catch (error) {
-  //     console.error("post request failed!",error)
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // }
 
-  // const handleChange = (e)=>{
-  //   setUrl(e.target.value);
-  //   if(maxLengthExceeded && e.target.value.length<=2000) setMaxLengthExceeded(false);
-  //   if(e.target.value.length>2000) setMaxLengthExceeded(true)
-  // }
 
-  // const validateUrl = (value)=>{
-  //   try {
-  //     new URL(value);
-  //     return true;
-  //   } catch (error) {
-  //     return false
-  //   }
-  // }
 
-  // const getRiskStyles = (riskScore) => {
-  //   if (riskScore >= 0.7) {
-  //     return {
-  //       bg: "bg-red-500/10 border-red-500/30",
-  //       text: "text-red-400",
-  //       badge: "bg-red-500/20 text-red-300 border-red-500/40",
-  //       label: "High Risk"
-  //     };
-  //   }
-  //   if (riskScore >= 0.4) {
-  //     return {
-  //       bg: "bg-orange-500/10 border-orange-500/30",
-  //       text: "text-orange-400",
-  //       badge: "bg-orange-500/20 text-orange-300 border-orange-500/40",
-  //       label: "Medium Risk"
-  //     };
-  //   }
-  //   if (riskScore >= 0.1) {
-  //     return {
-  //       bg: "bg-yellow-500/10 border-yellow-500/30",
-  //       text: "text-yellow-400",
-  //       badge: "bg-yellow-500/20 text-yellow-300 border-yellow-500/40",
-  //       label: "Low Risk"
-  //     };
-  //   }
-  //   return {
-  //     bg: "bg-emerald-500/10 border-emerald-500/30",
-  //     text: "text-emerald-400",
-  //     badge: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
-  //     label: "Safe"
-  //   };
-  // };
 
-  // const styles = getRiskStyles(data.risk_score);
-  const [showTheUrl,setShowTheUrl] = useState(false);
+
+  const [showTheUrl, setShowTheUrl] = useState(false);
   return (
-   
+
 
     <div>
-      {!showTheUrl && <SaforaDashboard setShowTheUrl={setShowTheUrl} />}
-      {showTheUrl && <ShowUrlCard  />}
+      {!showTheUrl && <SaforaDashboard isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} setShowTheUrl={setShowTheUrl} />}
+      {showTheUrl && <ShowUrlCard setShowTheUrl={setShowTheUrl} isDarkMode={isDarkMode} />}
+
+     
 
     </div>
 
@@ -129,40 +52,10 @@ function App() {
     //     {isLoading ? "Checking..." : "Check this link"}
     //   </button>
 
-    //   {dataReceived && (
-    //     <div className={`mt-4 rounded-xl border p-3.5 transition-all duration-300 ${styles.bg}`}>
-    //       <div className="flex items-center justify-between border-b border-zinc-800 pb-2.5 mb-2.5">
-    //         <span className="text-xs font-medium uppercase tracking-wider text-zinc-400">Analysis Result</span>
-    //         <span className={`text-xs px-2 py-0.5 rounded-full border font-semibold ${styles.badge}`}>
-    //           {styles.label}
-    //         </span>
-    //       </div>
 
-    //       <div className="flex justify-between items-baseline mb-3">
-    //         <span className="text-xs text-zinc-400">Risk Score</span>
-    //         <span className={`text-xl font-bold tracking-tight ${styles.text}`}>
-    //           {Math.round(data.risk_score * 100)}%
-    //         </span>
-    //       </div>
 
-    //       {data.reasons && data.reasons.length > 0 && (
-    //         <div className="space-y-1.5">
-    //           <span className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider block">Details:</span>
-    //           <ul className="space-y-1">
-    //             {data.reasons.map((reason, index) => (
-    //               <li key={index} className="text-xs text-zinc-300 flex items-start  gap-1.5 leading-relaxed">
-    //                 <span className={`mt-1.5 h-1 w-1 shrink-0 rounded-full bg-zinc-500 translate-y-0.5`} />
-    //                 <p className=" flex justify-center items-center" >
 
-    //                 {reason}
-    //                 </p>
-    //               </li>
-    //             ))}
-    //           </ul>
-    //         </div>
-    //       )}
-    //     </div>
-    //   )}
+
     // </div>
   )
 }

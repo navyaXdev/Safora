@@ -2,7 +2,6 @@ let currentTier = "safe";
 let passwordWarningShown = false;
 chrome.runtime.onMessage.addListener((message) => {
   if (message.type === "SCAN_RESULT") {
-    console.log("the message received is: ", message);
     // const { risk_score, label, reasons } = message.data;
     const tier = getRiskTier(message.data.risk_score);
     currentTier = tier;
@@ -17,7 +16,6 @@ chrome.runtime.onMessage.addListener((message) => {
   }
 
   if (message.type === "CONTEXT_CHECK_RESULT") {
-    console.log("i'm inside the CONTEXT_CHECK_RESULT");
     showContextCheckToast(message, message.url);
   }
 });
@@ -136,10 +134,6 @@ function showContextCheckToast(message, url) {
   //     }
   // }
   const result = message.result;
-  console.log(
-    "the data in the content.js with context menu has been received: ",
-    result,
-  );
   const exists = document.getElementById("cyberX-context-toast");
   if (exists) exists.remove();
 
@@ -219,11 +213,8 @@ function showContextCheckToast(message, url) {
 
 // if the user's website is flagged as medium/high risk and it tries to click an input then;
 document.addEventListener("focusin", (e) => {
-  console.log(document.activeElement);
   const ele = e.target; 
   const cfg = TIER_CONFIG[currentTier]
-  console.log("The type of the input is: ", ele.type);
-  console.log({ ele, passwordWarningShown });
   if (!ele || passwordWarningShown) return;
   if (currentTier !== "medium" && currentTier !== "high") return;
 
