@@ -1,7 +1,7 @@
 import { React,useState } from "react";
 
 
-const SaforaDashboard = () => {
+const SaforaDashboard = ({setShowTheUrl}) => {
     const [isDarkMode, setIsDarkMode] = useState(false);
 
     return (
@@ -79,6 +79,7 @@ const SaforaDashboard = () => {
                     </div>
 
                     <button
+                    onClick={ ()=>{ setShowTheUrl(true)}}
                         className={`flex w-full items-center justify-center gap-2 rounded-2xl border py-4 font-bold transition ${isDarkMode
                                 ? "border-zinc-800 bg-zinc-900 hover:bg-zinc-800"
                                 : "border-zinc-200 bg-white hover:bg-zinc-50"

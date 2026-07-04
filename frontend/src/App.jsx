@@ -1,100 +1,104 @@
 import { useEffect, useState } from "react"
 import SaforaDashboard from "./components/SaforaDashboard";
+import ShowUrlCard from "./components/ShowUrlCard";
 
 function App() {
 
-  const [isLoading, setIsLoading] = useState();
-  const [url,setUrl] = useState("");
-  const [data,setData] = useState({
-    risk_score: 0,
-    label: "safe",
-    reasons: ["everything is good", "no malware detected"]
-  });
-  const [dataReceived,setDataReceived] = useState(false);
-  const [isValidUrl,setIsValidUrl] = useState(null);
-  const[maxLengthExceeded,setMaxLengthExceeded] = useState(false);
+  // const [isLoading, setIsLoading] = useState();
+  // const [url,setUrl] = useState("");
+  // const [data,setData] = useState({
+  //   risk_score: 0,
+  //   label: "safe",
+  //   reasons: ["everything is good", "no malware detected"]
+  // });
+  // const [dataReceived,setDataReceived] = useState(false);
+  // const [isValidUrl,setIsValidUrl] = useState(null);
+  // const[maxLengthExceeded,setMaxLengthExceeded] = useState(false);
   
-  const handleCheckLink = async () => {
-    try {
-      const valid = validateUrl(url);
-      setIsValidUrl(valid);
-      if(valid===false) return;
-      setIsLoading(true);
-      console.log("Sending data to the backend")
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/predict`,{
-        method:'POST',
-        headers:{
-          "Content-Type":"application/json"
-        },
-        body:JSON.stringify({url})
-      })
-      const data = await response.json();
-      setData(data)
-      setDataReceived(true)
-      console.log("The data was sent to the backend and in response we got: ", data);
-      console.log("The url is: ",url);
-    } catch (error) {
-      console.error("post request failed!",error)
-    } finally {
-      setIsLoading(false);
-    }
-  }
 
-  const handleChange = (e)=>{
-    setUrl(e.target.value);
-    if(maxLengthExceeded && e.target.value.length<=2000) setMaxLengthExceeded(false);
-    if(e.target.value.length>2000) setMaxLengthExceeded(true)
-  }
+  // const handleCheckLink = async () => {
+  //   try {
+  //     const valid = validateUrl(url);
+  //     setIsValidUrl(valid);
+  //     if(valid===false) return;
+  //     setIsLoading(true);
+  //     console.log("Sending data to the backend")
+  //     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/predict`,{
+  //       method:'POST',
+  //       headers:{
+  //         "Content-Type":"application/json"
+  //       },
+  //       body:JSON.stringify({url})
+  //     })
+  //     const data = await response.json();
+  //     setData(data)
+  //     setDataReceived(true)
+  //     console.log("The data was sent to the backend and in response we got: ", data);
+  //     console.log("The url is: ",url);
+  //   } catch (error) {
+  //     console.error("post request failed!",error)
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // }
 
-  const validateUrl = (value)=>{
-    try {
-      new URL(value);
-      return true;
-    } catch (error) {
-      return false
-    }
-  }
+  // const handleChange = (e)=>{
+  //   setUrl(e.target.value);
+  //   if(maxLengthExceeded && e.target.value.length<=2000) setMaxLengthExceeded(false);
+  //   if(e.target.value.length>2000) setMaxLengthExceeded(true)
+  // }
 
-  const getRiskStyles = (riskScore) => {
-    if (riskScore >= 0.7) {
-      return {
-        bg: "bg-red-500/10 border-red-500/30",
-        text: "text-red-400",
-        badge: "bg-red-500/20 text-red-300 border-red-500/40",
-        label: "High Risk"
-      };
-    }
-    if (riskScore >= 0.4) {
-      return {
-        bg: "bg-orange-500/10 border-orange-500/30",
-        text: "text-orange-400",
-        badge: "bg-orange-500/20 text-orange-300 border-orange-500/40",
-        label: "Medium Risk"
-      };
-    }
-    if (riskScore >= 0.1) {
-      return {
-        bg: "bg-yellow-500/10 border-yellow-500/30",
-        text: "text-yellow-400",
-        badge: "bg-yellow-500/20 text-yellow-300 border-yellow-500/40",
-        label: "Low Risk"
-      };
-    }
-    return {
-      bg: "bg-emerald-500/10 border-emerald-500/30",
-      text: "text-emerald-400",
-      badge: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
-      label: "Safe"
-    };
-  };
+  // const validateUrl = (value)=>{
+  //   try {
+  //     new URL(value);
+  //     return true;
+  //   } catch (error) {
+  //     return false
+  //   }
+  // }
 
-  const styles = getRiskStyles(data.risk_score);
+  // const getRiskStyles = (riskScore) => {
+  //   if (riskScore >= 0.7) {
+  //     return {
+  //       bg: "bg-red-500/10 border-red-500/30",
+  //       text: "text-red-400",
+  //       badge: "bg-red-500/20 text-red-300 border-red-500/40",
+  //       label: "High Risk"
+  //     };
+  //   }
+  //   if (riskScore >= 0.4) {
+  //     return {
+  //       bg: "bg-orange-500/10 border-orange-500/30",
+  //       text: "text-orange-400",
+  //       badge: "bg-orange-500/20 text-orange-300 border-orange-500/40",
+  //       label: "Medium Risk"
+  //     };
+  //   }
+  //   if (riskScore >= 0.1) {
+  //     return {
+  //       bg: "bg-yellow-500/10 border-yellow-500/30",
+  //       text: "text-yellow-400",
+  //       badge: "bg-yellow-500/20 text-yellow-300 border-yellow-500/40",
+  //       label: "Low Risk"
+  //     };
+  //   }
+  //   return {
+  //     bg: "bg-emerald-500/10 border-emerald-500/30",
+  //     text: "text-emerald-400",
+  //     badge: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+  //     label: "Safe"
+  //   };
+  // };
 
+  // const styles = getRiskStyles(data.risk_score);
+  const [showTheUrl,setShowTheUrl] = useState(false);
   return (
    
 
     <div>
-       <SaforaDashboard/>
+      {!showTheUrl && <SaforaDashboard setShowTheUrl={setShowTheUrl} />}
+      {showTheUrl && <ShowUrlCard  />}
+
     </div>
 
     // <div className="w-80 bg-zinc-900 text-zinc-100 p-4 font-sans">
