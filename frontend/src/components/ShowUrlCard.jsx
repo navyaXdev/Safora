@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ShowUrlCard = ({ setShowTheUrl, isDarkMode}) => {
+const ShowUrlCard = ({ setShowTheUrl, isDarkMode,setShowThreatDetectWarning,setIsMaualCheck,data,setData}) => {
 
     const getRiskStyles = (riskScore) => {
         if (riskScore >= 0.7) {
@@ -42,11 +42,7 @@ const ShowUrlCard = ({ setShowTheUrl, isDarkMode}) => {
     const [isValidUrl, setIsValidUrl] = useState(null);
 
     const [dataReceived, setDataReceived] = useState(false);
-    const [data, setData] = useState({
-        risk_score: 0,
-        label: "safe",
-        reasons: ["everything is good", "no malware detected"]
-    });
+    
 
     const handleChange = (e) => {
         setUrl(e.target.value);
@@ -81,8 +77,9 @@ const ShowUrlCard = ({ setShowTheUrl, isDarkMode}) => {
             })
             const newData = await response.json();
             setData(newData)
+            if(newData.risk_score>=0.4) setShowThreatDetectWarning(true);
             console.log("the data received is:",newData)
-
+            setIsMaualCheck(true);
             setDataReceived(true)
         } catch (error) {
             console.error("post request failed!", error)

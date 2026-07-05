@@ -30,6 +30,10 @@ async function checkUrl(url, tabId) {
             }
         })
 
+        chrome.storage.local.set({
+            latestData:data
+        })
+
 
     } catch (error) {
         console.error("scan failed!", error)
