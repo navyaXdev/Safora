@@ -14,7 +14,6 @@ const AboutPageCard = ({ isDarkMode, setShowAboutPage }) => {
     }
 
     async function fetchInitialState() {
-
         const { showWarnings = true } = await chrome.storage.local.get("showWarnings");
         setShowWarning(showWarnings);
     }
