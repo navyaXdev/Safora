@@ -40,7 +40,7 @@
         "service_worker": "background.js"
     },
     "host_permissions": [
-        "https://safora.onrender.com/*",
+        "0.0.0.0/*",
         "<all_urls>"
     ]
 }
