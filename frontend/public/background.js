@@ -70,6 +70,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         checkUrlManual(message.url).then(sendResponse);
         return true;
     }
+
+    if(message.type === "CLOSE_TAB"){
+        chrome.tabs.remove(message.tabId);
+        sendResponse({success:true})
+    }
 })
 
 

@@ -5,48 +5,44 @@ import SpottedAThreadCard from "./components/SpottedAThreadCard";
 
 function App() {
 
-  
-  // const [isLoading, setIsLoading] = useState();
+
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [showTheUrl, setShowTheUrl] = useState(false);
-  const [showThreatDetectWarning,setShowThreatDetectWarning] = useState(false);
-  const [isManualCheck,setIsMaualCheck] = useState(false);
-  const [data, setData] = useState({
-        risk_score: 0,
-        label: "safe",
-        reasons: ["everything is good", "no malware detected"]
-    });
+  const [currentPageData, setCurrentPageData] = useState({
+    risk_score: 0,
+    label: "safe",
+    reasons: ["everything is good", "no malware detected"]
+  });
+  const [manualScanData, setManualScanData] = useState({
+    risk_score: 0,
+    label: "safe",
+    reasons: ["everything is good", "no malware detected"]
+  });
 
-  useEffect(()=>{
-    chrome.storage.local.get("latestData",(result)=>{
-      if(result.latestData){
+  useEffect(() => {
+    chrome.storage.local.get("latestData", (result) => {
+      if (result.latestData) {
         const newData = result.latestData;
-        setData(newData);
-        setIsMaualCheck(false);
-        if(newData.risk_score>=0.4) setShowThreatDetectWarning(true);
+        setCurrentPageData(newData);
       }
     })
-  },[])
+  }, [])
 
-  useEffect(()=>{
+  const shouldShowThreatWarning = !showTheUrl && currentPageData.risk_score >= 0.1;
 
-      console.log("I'm running and the  data is:",data)
-      console.log("the manual check is:",isManualCheck);
-      console.log("The showThreadwarning is: ",showThreatDetectWarning)
-  },[data,isManualCheck,showThreatDetectWarning])
 
 
   return (
 
 
     <div>
-      {!showTheUrl && !showThreatDetectWarning && <SaforaDashboard isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} setShowTheUrl={setShowTheUrl} />}
+      {!shouldShowThreatWarning && !showTheUrl && <SaforaDashboard isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} setShowTheUrl={setShowTheUrl} />}
 
-      {showTheUrl && <ShowUrlCard setShowTheUrl={setShowTheUrl} isDarkMode={isDarkMode}  setShowThreatDetectWarning={setShowThreatDetectWarning} setIsMaualCheck={setIsMaualCheck} data={data} setData={setData}/> }
-      
-      {!isManualCheck && showThreatDetectWarning && <SpottedAThreadCard isDarkMode={isDarkMode}  setShowThreatDetectWarning={setShowThreatDetectWarning}  />}
+      {showTheUrl && <ShowUrlCard setShowTheUrl={setShowTheUrl} isDarkMode={isDarkMode} manualScanData={manualScanData} setManualScanData={setManualScanData} />}
 
-     
+      {shouldShowThreatWarning && <SpottedAThreadCard isDarkMode={isDarkMode} setShowTheUrl={setShowTheUrl} riskScore={currentPageData.risk_score} />}
+
+
 
     </div>
 

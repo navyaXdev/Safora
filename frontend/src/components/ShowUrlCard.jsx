@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ShowUrlCard = ({ setShowTheUrl, isDarkMode,setShowThreatDetectWarning,setIsMaualCheck,data,setData}) => {
+const ShowUrlCard = ({ setShowTheUrl, isDarkMode,manualScanData,setManualScanData}) => {
 
     const getRiskStyles = (riskScore) => {
         if (riskScore >= 0.7) {
@@ -76,10 +76,8 @@ const ShowUrlCard = ({ setShowTheUrl, isDarkMode,setShowThreatDetectWarning,setI
                 body: JSON.stringify({ url })
             })
             const newData = await response.json();
-            setData(newData)
-            if(newData.risk_score>=0.4) setShowThreatDetectWarning(true);
+            setManualScanData(newData)
             console.log("the data received is:",newData)
-            setIsMaualCheck(true);
             setDataReceived(true)
         } catch (error) {
             console.error("post request failed!", error)
@@ -88,7 +86,7 @@ const ShowUrlCard = ({ setShowTheUrl, isDarkMode,setShowThreatDetectWarning,setI
         }
     }
     
-    const styles = getRiskStyles(data.risk_score);
+    const styles = getRiskStyles(manualScanData.risk_score);
 
 
     if (isLoading) {
@@ -226,7 +224,11 @@ const ShowUrlCard = ({ setShowTheUrl, isDarkMode,setShowThreatDetectWarning,setI
     </button>
 
     <button
-        onClick={() => setShowTheUrl(false)}
+        onClick={() => {
+            console.log("the data before going back is: ",manualScanData)
+            setShowTheUrl(false)
+        
+        }}
         className={`text-sm font-medium transition cursor-pointer ${
             isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-500 hover:text-zinc-700"
         }`}
@@ -248,17 +250,17 @@ const ShowUrlCard = ({ setShowTheUrl, isDarkMode,setShowThreatDetectWarning,setI
             <div className="flex justify-between items-baseline mb-3">
                 <span className="text-xs text-zinc-400">Risk Score</span>
                 <span className={`text-xl font-bold tracking-tight ${styles.text}`}>
-                    {Math.round(data.risk_score * 100)}%
+                    {Math.round(manualScanData.risk_score * 100)}%
                 </span>
             </div>
 
-            {data.reasons && data.reasons.length > 0 && (
+            {manualScanData.reasons && manualScanData.reasons.length > 0 && (
                 <div className="space-y-1.5">
                     <span className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider block">
                         Details:
                     </span>
                     <ul className="space-y-1">
-                        {data.reasons.map((reason, index) => (
+                        {manualScanData.reasons.map((reason, index) => (
                             <li key={index} className="text-xs text-zinc-300 flex items-start gap-1.5 leading-relaxed">
                                 <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-zinc-500 translate-y-0.5" />
                                 <p className="flex justify-center items-center">
