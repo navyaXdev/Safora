@@ -20,11 +20,7 @@ frontend/node_modules/.vite-temp/
 *.local
 
 # ==== Environment / secrets ====
-.env
-.env.*
-!.env.example
 frontend/.env
-frontend/.env.*
 
 # ==== Editor / OS ====
 .vscode/
