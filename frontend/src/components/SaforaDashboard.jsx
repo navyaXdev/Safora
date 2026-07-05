@@ -1,7 +1,7 @@
 import { React,useState } from "react";
 
 
-const SaforaDashboard = ({setShowTheUrl,isDarkMode,setIsDarkMode}) => {
+const SaforaDashboard = ({setShowTheUrl,isDarkMode,setIsDarkMode,setShowAboutPage}) => {
 
     return (
         <div
@@ -32,6 +32,7 @@ const SaforaDashboard = ({setShowTheUrl,isDarkMode,setIsDarkMode}) => {
                         </button>
 
                         <button
+                        onClick={()=>{setShowAboutPage(true)}}
                             className={`flex h-10 w-10 items-center justify-center rounded-xl border cursor-pointer  ${isDarkMode
                                     ? "border-zinc-800 bg-zinc-900 hover:bg-zinc-800"
                                     : "border-zinc-200 bg-white hover:bg-zinc-300"

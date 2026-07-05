@@ -1,6 +1,6 @@
 import React from "react";
 
-const SpottedAThreadCard = ({ isDarkMode, setShowTheUrl, riskScore = 0.7 }) => {
+const SpottedAThreadCard = ({ isDarkMode, setShowTheUrl, riskScore = 0.7,setShowAboutPage }) => {
 
   async function handleCloseTheTab() {
     const tabs = await chrome.tabs.query({
@@ -80,7 +80,8 @@ const SpottedAThreadCard = ({ isDarkMode, setShowTheUrl, riskScore = 0.7 }) => {
         </div>
 
         <button
-          className={`flex h-9 w-9 items-center justify-center rounded-xl border transition-colors duration-200 ${isDarkMode
+        onClick={()=>{setShowAboutPage(true)}}
+          className={`flex h-9 w-9 items-center justify-center rounded-xl border transition-colors duration-200 cursor-pointer ${isDarkMode
               ? "border-zinc-800 text-zinc-400 hover:bg-zinc-900 hover:text-white"
               : "border-zinc-200 text-zinc-500 hover:bg-zinc-50 hover:text-zinc-800"
             }`}

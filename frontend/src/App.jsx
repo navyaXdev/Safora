@@ -2,12 +2,14 @@ import { useEffect, useState } from "react"
 import SaforaDashboard from "./components/SaforaDashboard";
 import ShowUrlCard from "./components/ShowUrlCard";
 import SpottedAThreadCard from "./components/SpottedAThreadCard";
+import AboutPageCard from "./components/AboutPageCard";
 
 function App() {
 
 
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [showTheUrl, setShowTheUrl] = useState(false);
+  const [showAboutPage,setShowAboutPage] = useState(false);
   const [currentPageData, setCurrentPageData] = useState({
     risk_score: 0,
     label: "safe",
@@ -20,13 +22,25 @@ function App() {
   });
 
   useEffect(() => {
-    chrome.storage.local.get("latestData", (result) => {
-      if (result.latestData) {
-        const newData = result.latestData;
+    fetchUrlScanResult();
+  }, [])
+
+  async function fetchUrlScanResult(){
+    const [tab] = await chrome.tabs.query({
+      active:true,
+      currentWindow:true
+    })
+
+    chrome.storage.local.get("scanResults", ({scanResults={}}) => {
+      if (scanResults[tab.id]) {
+        const newData = scanResults?.[tab.id];
         setCurrentPageData(newData);
       }
     })
-  }, [])
+
+    
+
+  }
 
   const shouldShowThreatWarning = !showTheUrl && currentPageData.risk_score >= 0.1;
 
@@ -35,12 +49,14 @@ function App() {
   return (
 
 
-    <div>
-      {!shouldShowThreatWarning && !showTheUrl && <SaforaDashboard isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} setShowTheUrl={setShowTheUrl} />}
+    <div className=" " >
+      {!showAboutPage && !shouldShowThreatWarning && !showTheUrl && <SaforaDashboard isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} setShowTheUrl={setShowTheUrl} setShowAboutPage={setShowAboutPage} />}
 
-      {showTheUrl && <ShowUrlCard setShowTheUrl={setShowTheUrl} isDarkMode={isDarkMode} manualScanData={manualScanData} setManualScanData={setManualScanData} />}
+      {!showAboutPage && showTheUrl && <ShowUrlCard setShowTheUrl={setShowTheUrl} isDarkMode={isDarkMode} manualScanData={manualScanData} setManualScanData={setManualScanData} />}
 
-      {shouldShowThreatWarning && <SpottedAThreadCard isDarkMode={isDarkMode} setShowTheUrl={setShowTheUrl} riskScore={currentPageData.risk_score} />}
+      {!showAboutPage && shouldShowThreatWarning && <SpottedAThreadCard isDarkMode={isDarkMode} setShowTheUrl={setShowTheUrl} riskScore={currentPageData.risk_score} setShowAboutPage={setShowAboutPage} />}
+
+      {showAboutPage && <AboutPageCard isDarkMode={isDarkMode} setShowAboutPage={setShowAboutPage} />}
 
 
 

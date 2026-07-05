@@ -1,24 +1,35 @@
 let currentTier = "safe";
 let passwordWarningShown = false;
 chrome.runtime.onMessage.addListener((message) => {
+
   if (message.type === "SCAN_RESULT") {
     // const { risk_score, label, reasons } = message.data;
     const tier = getRiskTier(message.data.risk_score);
     currentTier = tier;
 
     removeExisting();
+    displayWarning(message,tier);
 
-    if (tier === "high") {
-      showFullWarning(message.data, tier);
-    } else if (tier === "medium" || tier === "low") {
-      showBanner(message.data, tier);
-    }
+   
   }
 
   if (message.type === "CONTEXT_CHECK_RESULT") {
     showContextCheckToast(message, message.url);
   }
 });
+
+
+async function displayWarning(message,tier){
+  const {showWarnings=true} = await chrome.storage.local.get("showWarnings")
+
+   if (tier === "high") {
+      showFullWarning(message.data, tier);
+    } else if (showWarnings && (tier === "medium" || tier === "low")) {
+      showBanner(message.data, tier);
+    }
+}
+
+
 
 function removeExisting() {
   const overlay = document.getElementById("cyberX-overlay");
@@ -125,6 +136,7 @@ function escapeHtml(str) {
 }
 
 function showContextCheckToast(message, url) {
+  // how message will look like: 
   // message:{
   //     type:,
   //     url:,
