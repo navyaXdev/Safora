@@ -43,9 +43,7 @@ const AboutPageCard = ({ isDarkMode, setShowAboutPage }) => {
                 </button>
 
                 <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-600 shadow-md shadow-emerald-600/10">
-                        <img src="images/image2.png" alt="" className="w-5.5 h-5.5 object-contain" />
-                    </div>
+                        <img  src="images/image2.png" alt="" className="w-10 h-10 object-contain" />
 
                     <h1 className={`text-lg font-black tracking-wider ${isDarkMode ? "text-white" : "text-zinc-900"}`}>
                         SAFORA
