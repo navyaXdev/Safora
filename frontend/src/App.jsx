@@ -23,6 +23,7 @@ function App() {
 
   useEffect(() => {
     fetchUrlScanResult();
+    loadTheme();
   }, [])
 
   async function fetchUrlScanResult(){
@@ -39,8 +40,14 @@ function App() {
     })
 
     
-
   }
+
+  async function loadTheme(){
+    
+    const {darkTheme = true} = await chrome.storage.local.get("darkTheme")
+    setIsDarkMode(darkTheme);
+  }
+
 
   const shouldShowThreatWarning = !showTheUrl && currentPageData.risk_score >= 0.1;
 
@@ -54,7 +61,7 @@ function App() {
 
       {!showAboutPage && showTheUrl && <ShowUrlCard setShowTheUrl={setShowTheUrl} isDarkMode={isDarkMode} manualScanData={manualScanData} setManualScanData={setManualScanData} />}
 
-      {!showAboutPage && shouldShowThreatWarning && <SpottedAThreadCard isDarkMode={isDarkMode} setShowTheUrl={setShowTheUrl} riskScore={currentPageData.risk_score} setShowAboutPage={setShowAboutPage} />}
+      {!showAboutPage && shouldShowThreatWarning && <SpottedAThreadCard isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} setShowTheUrl={setShowTheUrl} riskScore={currentPageData.risk_score} setShowAboutPage={setShowAboutPage} />}
 
       {showAboutPage && <AboutPageCard isDarkMode={isDarkMode} setShowAboutPage={setShowAboutPage} />}
 

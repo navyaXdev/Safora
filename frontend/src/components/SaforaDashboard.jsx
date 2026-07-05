@@ -3,6 +3,14 @@ import { React,useState } from "react";
 
 const SaforaDashboard = ({setShowTheUrl,isDarkMode,setIsDarkMode,setShowAboutPage}) => {
 
+    const handleChangeTheme = ()=>{
+        const newTheme = !isDarkMode;
+        chrome.storage.local.set({
+            darkTheme:newTheme
+        })
+        setIsDarkMode((prev) => !prev)
+    }
+
     return (
         <div
             className={`w-90 p-3 transition-colors duration-300 ${isDarkMode ? "bg-zinc-950" : "bg-zinc-100"
@@ -22,7 +30,7 @@ const SaforaDashboard = ({setShowTheUrl,isDarkMode,setIsDarkMode,setShowAboutPag
 
                     <div className="flex gap-2">
                         <button
-                            onClick={() => setIsDarkMode((prev) => !prev)}
+                            onClick={handleChangeTheme}
                             className={`flex h-10 w-10 items-center justify-center rounded-xl border transition cursor-pointer  ${isDarkMode
                                     ? "border-zinc-800 bg-zinc-900 hover:bg-zinc-800"
                                     : "border-zinc-200 bg-white hover:bg-zinc-300"

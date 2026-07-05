@@ -1,6 +1,6 @@
 import React from "react";
 
-const SpottedAThreadCard = ({ isDarkMode, setShowTheUrl, riskScore = 0.7,setShowAboutPage }) => {
+const SpottedAThreadCard = ({ isDarkMode, setShowTheUrl, riskScore = 0.7, setShowAboutPage,setIsDarkMode }) => {
 
   async function handleCloseTheTab() {
     const tabs = await chrome.tabs.query({
@@ -18,7 +18,7 @@ const SpottedAThreadCard = ({ isDarkMode, setShowTheUrl, riskScore = 0.7,setShow
   const getRiskLevel = (score) => {
     if (score >= 0.7) return 'high';
     if (score >= 0.4) return 'medium';
-    return 'low'; 
+    return 'low';
   };
 
   const riskLevel = getRiskLevel(riskScore);
@@ -60,46 +60,54 @@ const SpottedAThreadCard = ({ isDarkMode, setShowTheUrl, riskScore = 0.7,setShow
   };
 
   const currentTheme = riskThemes[riskLevel];
+  const handleChangeTheme = ()=>{
+        const newTheme = !isDarkMode;
+        chrome.storage.local.set({
+            darkTheme:newTheme
+        })
+        setIsDarkMode((prev)=>!prev)
+
+    }
 
   return (
     <div
       className={`w-90 rounded-2xl border p-5 shadow-xl transition-all duration-300 ${isDarkMode
-          ? "border-zinc-800 bg-zinc-950 text-zinc-100 shadow-black/50"
-          : "border-zinc-100 bg-white text-zinc-800 shadow-zinc-300/40"
+        ? "border-zinc-800 bg-zinc-950 text-zinc-100 shadow-black/50"
+        : "border-zinc-100 bg-white text-zinc-800 shadow-zinc-300/40"
         }`}
     >
       <div className="mb-6 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-600 shadow-md shadow-emerald-600/10">
-            <img src="images/image2.png" alt="" />
-          </div>
+            <img className="w-10 h-10" src="images/image2.png" alt="" />
 
           <h1 className={`text-base font-black tracking-wider ${isDarkMode ? "text-white" : "text-zinc-900"}`}>
             SAFORA
           </h1>
         </div>
 
-        <button
-        onClick={()=>{setShowAboutPage(true)}}
-          className={`flex h-9 w-9 items-center justify-center rounded-xl border transition-colors duration-200 cursor-pointer ${isDarkMode
-              ? "border-zinc-800 text-zinc-400 hover:bg-zinc-900 hover:text-white"
-              : "border-zinc-200 text-zinc-500 hover:bg-zinc-50 hover:text-zinc-800"
-            }`}
-        >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+
+
+        <div className="flex gap-2">
+          <button
+            onClick={handleChangeTheme}
+            className={`flex h-10 w-10 items-center justify-center rounded-xl border transition cursor-pointer  ${isDarkMode
+              ? "border-zinc-800 bg-zinc-900 hover:bg-zinc-800"
+              : "border-zinc-200 bg-white hover:bg-zinc-300"
+              }`}
           >
-            <circle cx="12" cy="12" r="3" />
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9A1.65 1.65 0 0 0 10 3.09V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c0 .69.4 1.31 1.03 1.51H21a2 2 0 1 1 0 4h-.09c-.69 0-1.31.4-1.51 1.03Z" />
-          </svg>
-        </button>
+            {isDarkMode ? "☀️" : "🌙"}
+          </button>
+
+          <button
+            onClick={() => { setShowAboutPage(true) }}
+            className={`flex h-10 w-10 items-center justify-center rounded-xl border cursor-pointer  ${isDarkMode
+              ? "border-zinc-800 bg-zinc-900 hover:bg-zinc-800"
+              : "border-zinc-200 bg-white hover:bg-zinc-300"
+              }`}
+          >
+            ⚙️
+          </button>
+        </div>
       </div>
 
       <div className="mb-4 flex justify-center">
@@ -109,7 +117,7 @@ const SpottedAThreadCard = ({ isDarkMode, setShowTheUrl, riskScore = 0.7,setShow
             height="38"
             viewBox="0 0 24 24"
             fill="none"
-            stroke={currentTheme.strokeColor} 
+            stroke={currentTheme.strokeColor}
             strokeWidth="2.2"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -132,17 +140,17 @@ const SpottedAThreadCard = ({ isDarkMode, setShowTheUrl, riskScore = 0.7,setShow
       </div>
 
       <div className="flex flex-col gap-2 mb-4">
-        <button 
-          onClick={handleCloseTheTab} 
+        <button
+          onClick={handleCloseTheTab}
           className={`w-full rounded-xl py-3 text-xs font-bold text-white shadow-lg transition-all cursor-pointer duration-200 active:scale-[0.99] ${currentTheme.buttonBg}`}
         >
           Close This Tab
         </button>
 
         <button
-          onClick={() => { 
+          onClick={() => {
             setShowTheUrl(true)
-           }}
+          }}
           className={`flex w-full items-center justify-center gap-2 rounded-xl border py-2.5 font-bold transition cursor-pointer ${isDarkMode
             ? "border-zinc-800 bg-zinc-900 hover:bg-zinc-800"
             : "border-zinc-200 bg-white hover:bg-zinc-50"
