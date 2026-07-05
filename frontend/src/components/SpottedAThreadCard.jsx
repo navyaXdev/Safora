@@ -68,7 +68,6 @@ const SpottedAThreadCard = ({ isDarkMode,setShowThreatDetectWarning }) => {
         </div>
       </div>
 
-      {/* Main Alert Content */}
       <div className="text-center">
         <h2 className="mb-2 text-xl font-black tracking-tight text-red-500">
           Threat Detected
@@ -81,15 +80,13 @@ const SpottedAThreadCard = ({ isDarkMode,setShowThreatDetectWarning }) => {
         </p>
       </div>
 
-      {/* Primary Action Button */}
       <button onClick={()=>{
         setShowThreatDetectWarning(false)
 
-      }} className="mb-4 w-full rounded-xl bg-red-600 py-3 text-xs font-bold text-white shadow-lg shadow-red-600/10 transition-all duration-200 hover:bg-red-500 active:scale-[0.99]">
+      }} className="mb-4 w-full rounded-xl bg-red-600 py-3 text-xs font-bold text-white shadow-lg shadow-red-600/10 transition-all cursor-pointer duration-200 hover:bg-red-500 active:scale-[0.99]">
         Close This Tab
       </button>
 
-      {/* Footer Security Status Badge */}
       <div
         className={`flex items-center justify-between rounded-xl border px-3.5 py-2.5 transition-colors duration-300 ${
           isDarkMode

@@ -220,14 +220,14 @@ const ShowUrlCard = ({ setShowTheUrl, isDarkMode,setShowThreatDetectWarning,setI
 
     <button
         onClick={handleCheckLink}
-        className="mb-5 w-full rounded-xl bg-green-700 py-3.5 font-semibold text-white transition hover:bg-green-800"
+        className="mb-5 w-full rounded-xl bg-green-700 py-3.5 font-semibold text-white transition hover:bg-green-800 cursor-pointer"
     >
         Check Safety
     </button>
 
     <button
         onClick={() => setShowTheUrl(false)}
-        className={`text-sm font-medium transition ${
+        className={`text-sm font-medium transition cursor-pointer ${
             isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-500 hover:text-zinc-700"
         }`}
     >
