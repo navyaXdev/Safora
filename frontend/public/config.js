@@ -1,5 +1,5 @@
 
-const API_URL = 'https://0.0.0.0/predict'
+const API_URL = `${import.meta.env.VITE_BACKEND_URL}/predict` ;
 
 function getRiskTier(riskScore){
     if (riskScore >= 0.7) return 'high';

@@ -1,4 +1,41 @@
-backend
+# ==== Python (API) ====
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+ENV/
+*.log
+
+# ==== Node / React / Vite (frontend) ====
+frontend/node_modules/
+node_modules/
+frontend/dist/
+dist/
+frontend/.vite/
+frontend/node_modules/.vite-temp/
+*.local
+
+# ==== Environment / secrets ====
 .env
-.env.local
 .env.*
+!.env.example
+frontend/.env
+frontend/.env.*
+
+# ==== Editor / OS ====
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ==== Misc build artifacts ====
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
