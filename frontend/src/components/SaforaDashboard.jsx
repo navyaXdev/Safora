@@ -1,7 +1,7 @@
 import { React,useState } from "react";
 
 
-const SaforaDashboard = ({setShowTheUrl,isDarkMode,setIsDarkMode}) => {
+const SaforaDashboard = ({setShowTheUrl,isDarkMode,setIsDarkMode,setShowAboutPage}) => {
 
     return (
         <div
@@ -23,18 +23,19 @@ const SaforaDashboard = ({setShowTheUrl,isDarkMode,setIsDarkMode}) => {
                     <div className="flex gap-2">
                         <button
                             onClick={() => setIsDarkMode((prev) => !prev)}
-                            className={`flex h-10 w-10 items-center justify-center rounded-xl border transition ${isDarkMode
-                                    ? "border-zinc-800 bg-zinc-900"
-                                    : "border-zinc-200 bg-white"
+                            className={`flex h-10 w-10 items-center justify-center rounded-xl border transition cursor-pointer  ${isDarkMode
+                                    ? "border-zinc-800 bg-zinc-900 hover:bg-zinc-800"
+                                    : "border-zinc-200 bg-white hover:bg-zinc-300"
                                 }`}
                         >
                             {isDarkMode ? "☀️" : "🌙"}
                         </button>
 
                         <button
-                            className={`flex h-10 w-10 items-center justify-center rounded-xl border ${isDarkMode
-                                    ? "border-zinc-800 bg-zinc-900"
-                                    : "border-zinc-200 bg-white"
+                        onClick={()=>{setShowAboutPage(true)}}
+                            className={`flex h-10 w-10 items-center justify-center rounded-xl border cursor-pointer  ${isDarkMode
+                                    ? "border-zinc-800 bg-zinc-900 hover:bg-zinc-800"
+                                    : "border-zinc-200 bg-white hover:bg-zinc-300"
                                 }`}
                         >
                             ⚙️
@@ -42,7 +43,6 @@ const SaforaDashboard = ({setShowTheUrl,isDarkMode,setIsDarkMode}) => {
                     </div>
                 </header>
 
-                {/* Main */}
                 <main className="text-center">
                     <div className="mx-auto mb-5 flex h-22.5 w-22.5 items-center justify-center rounded-full bg-emerald-50">
                         <svg width="42" height="42" viewBox="0 0 24 24" fill="none">
@@ -79,7 +79,7 @@ const SaforaDashboard = ({setShowTheUrl,isDarkMode,setIsDarkMode}) => {
 
                     <button
                     onClick={ ()=>{ setShowTheUrl(true)}}
-                        className={`flex w-full items-center justify-center gap-2 rounded-2xl border py-4 font-bold transition ${isDarkMode
+                        className={`flex w-full items-center justify-center gap-2 rounded-2xl border py-4 font-bold transition cursor-pointer ${isDarkMode
                                 ? "border-zinc-800 bg-zinc-900 hover:bg-zinc-800"
                                 : "border-zinc-200 bg-white hover:bg-zinc-50"
                             }`}

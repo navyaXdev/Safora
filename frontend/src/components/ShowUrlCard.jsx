@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ShowUrlCard = ({ setShowTheUrl, isDarkMode}) => {
+const ShowUrlCard = ({ setShowTheUrl, isDarkMode,manualScanData,setManualScanData}) => {
 
     const getRiskStyles = (riskScore) => {
         if (riskScore >= 0.7) {
@@ -42,11 +42,7 @@ const ShowUrlCard = ({ setShowTheUrl, isDarkMode}) => {
     const [isValidUrl, setIsValidUrl] = useState(null);
 
     const [dataReceived, setDataReceived] = useState(false);
-    const [data, setData] = useState({
-        risk_score: 0,
-        label: "safe",
-        reasons: ["everything is good", "no malware detected"]
-    });
+    
 
     const handleChange = (e) => {
         setUrl(e.target.value);
@@ -80,9 +76,8 @@ const ShowUrlCard = ({ setShowTheUrl, isDarkMode}) => {
                 body: JSON.stringify({ url })
             })
             const newData = await response.json();
-            setData(newData)
+            setManualScanData(newData)
             console.log("the data received is:",newData)
-
             setDataReceived(true)
         } catch (error) {
             console.error("post request failed!", error)
@@ -91,7 +86,7 @@ const ShowUrlCard = ({ setShowTheUrl, isDarkMode}) => {
         }
     }
     
-    const styles = getRiskStyles(data.risk_score);
+    const styles = getRiskStyles(manualScanData.risk_score);
 
 
     if (isLoading) {
@@ -195,7 +190,7 @@ const ShowUrlCard = ({ setShowTheUrl, isDarkMode}) => {
 
     {/* Input & Error Handling Container */}
     <div className="relative mb-6 text-left">
-        <span className="absolute top-[26px] left-3 -translate-y-1/2 text-zinc-400">
+        <span className="absolute top-6 left-3 -translate-y-1/2 text-zinc-400">
             🔗
         </span>
 
@@ -223,14 +218,18 @@ const ShowUrlCard = ({ setShowTheUrl, isDarkMode}) => {
 
     <button
         onClick={handleCheckLink}
-        className="mb-5 w-full rounded-xl bg-green-700 py-3.5 font-semibold text-white transition hover:bg-green-800"
+        className="mb-5 w-full rounded-xl bg-green-700 py-3.5 font-semibold text-white transition hover:bg-green-800 cursor-pointer"
     >
         Check Safety
     </button>
 
     <button
-        onClick={() => setShowTheUrl(false)}
-        className={`text-sm font-medium transition ${
+        onClick={() => {
+            console.log("the data before going back is: ",manualScanData)
+            setShowTheUrl(false)
+        
+        }}
+        className={`text-sm font-medium transition cursor-pointer ${
             isDarkMode ? "text-zinc-400 hover:text-white" : "text-zinc-500 hover:text-zinc-700"
         }`}
     >
@@ -251,17 +250,17 @@ const ShowUrlCard = ({ setShowTheUrl, isDarkMode}) => {
             <div className="flex justify-between items-baseline mb-3">
                 <span className="text-xs text-zinc-400">Risk Score</span>
                 <span className={`text-xl font-bold tracking-tight ${styles.text}`}>
-                    {Math.round(data.risk_score * 100)}%
+                    {Math.round(manualScanData.risk_score * 100)}%
                 </span>
             </div>
 
-            {data.reasons && data.reasons.length > 0 && (
+            {manualScanData.reasons && manualScanData.reasons.length > 0 && (
                 <div className="space-y-1.5">
                     <span className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider block">
                         Details:
                     </span>
                     <ul className="space-y-1">
-                        {data.reasons.map((reason, index) => (
+                        {manualScanData.reasons.map((reason, index) => (
                             <li key={index} className="text-xs text-zinc-300 flex items-start gap-1.5 leading-relaxed">
                                 <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-zinc-500 translate-y-0.5" />
                                 <p className="flex justify-center items-center">

@@ -30,6 +30,15 @@ async function checkUrl(url, tabId) {
             }
         })
 
+        chrome.storage.local.get("scanResults",({scanResults={}})=>{
+            scanResults[tabId] = data;
+            chrome.storage.local.set({
+                scanResults
+            })
+
+        })
+
+
 
     } catch (error) {
         console.error("scan failed!", error)
@@ -60,11 +69,15 @@ const setBadgeError = (tabId) => {
 
 
 // if the user types manual url from the frontend then:
-
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.type === "MANUAL_CHECK") {
         checkUrlManual(message.url).then(sendResponse);
         return true;
+    }
+
+    if(message.type === "CLOSE_TAB"){
+        chrome.tabs.remove(message.tabId);
+        sendResponse({success:true})
     }
 })
 
@@ -107,4 +120,12 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 
         }
     })
+})
+
+chrome.tabs.onRemoved.addListener((tabId,removeInfo)=>{
+    chrome.storage.local.get("scanResults",({scanResults = {}})=>{
+        delete scanResults[tabId];
+        chrome.storage.local.set({scanResults}) 
+    })
+
 })
