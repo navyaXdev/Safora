@@ -40,7 +40,8 @@
         "service_worker": "background.js"
     },
     "host_permissions": [
-        "https://0.0.0.0/*", 
+        
+        "https://0.0.0.0/*",
         "<all_urls>"
     ]
 }
