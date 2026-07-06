@@ -3,8 +3,8 @@ const API_URL = 'https://safora.onrender.com/predict'
 
 function getRiskTier(riskScore){
     if (riskScore >= 0.7) return 'high';
-    if (riskScore >= 0.4) return 'medium';
-    if(riskScore>=0.1) return 'low';
+    if (riskScore >= 0.5) return 'medium';
+    if(riskScore>=0.3) return 'low';
     return 'safe';
 }
 

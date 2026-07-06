@@ -11,7 +11,7 @@ const ShowUrlCard = ({ setShowTheUrl, isDarkMode,manualScanData,setManualScanDat
                 label: "High Risk"
             };
         }
-        if (riskScore >= 0.4) {
+        if (riskScore >= 0.5) {
             return {
                 bg: "bg-orange-500/10 border-orange-500/30",
                 text: "text-orange-400",
@@ -19,7 +19,7 @@ const ShowUrlCard = ({ setShowTheUrl, isDarkMode,manualScanData,setManualScanDat
                 label: "Medium Risk"
             };
         }
-        if (riskScore >= 0.1) {
+        if (riskScore >= 0.3) {
             return {
                 bg: "bg-yellow-500/10 border-yellow-500/30",
                 text: "text-yellow-400",
