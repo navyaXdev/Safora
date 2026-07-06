@@ -1,5 +1,5 @@
 
-const API_URL = `https://127.0.0.1:5000/predict` ;
+const API_URL = `http://0.0.0.0:5000/predict` ;
 
 function getRiskTier(riskScore){
     if (riskScore >= 0.7) return 'high';
