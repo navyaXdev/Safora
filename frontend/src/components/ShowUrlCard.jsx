@@ -188,7 +188,6 @@ const ShowUrlCard = ({ setShowTheUrl, isDarkMode,manualScanData,setManualScanDat
         Paste a link to see if it's safe.
     </p>
 
-    {/* Input & Error Handling Container */}
     <div className="relative mb-6 text-left">
         <span className="absolute top-6 left-3 -translate-y-1/2 text-zinc-400">
             🔗
@@ -208,7 +207,6 @@ const ShowUrlCard = ({ setShowTheUrl, isDarkMode,manualScanData,setManualScanDat
             }`}
         />
 
-        {/* Clean, Non-intrusive Error Message */}
         {isValidUrl===false && (
             <div className="mt-2 flex items-center gap-1.5 text-xs font-medium text-red-500 animate-fade-in">
                 <span>⚠️</span> Please enter a valid URL
