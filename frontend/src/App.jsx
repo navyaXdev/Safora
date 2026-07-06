@@ -49,7 +49,7 @@ function App() {
   }
 
 
-  const shouldShowThreatWarning = !showTheUrl && currentPageData.risk_score >= 0.1;
+  const shouldShowThreatWarning = !showTheUrl && currentPageData.risk_score >= 0.3;
 
 
 

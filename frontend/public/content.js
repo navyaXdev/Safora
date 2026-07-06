@@ -1,15 +1,13 @@
 let currentTier = "safe";
 let passwordWarningShown = false;
+
 chrome.runtime.onMessage.addListener((message) => {
 
   if (message.type === "SCAN_RESULT") {
     const tier = getRiskTier(message.data.risk_score);
     currentTier = tier;
-
     removeExisting();
     displayWarning(message,tier);
-
-   
   }
 
   if (message.type === "CONTEXT_CHECK_RESULT") {
@@ -108,7 +106,7 @@ function showBanner(data, tier) {
     justify-content:center;
     gap:12px;
     font-size:14px;">
-      <span>\u26A0\uFE0F ${tier === "medium" ? "This site looks a little suspicious" : "This site has a minor risk flag"} (${Math.round(
+      <span> \u26A0\uFE0F ${tier === "medium" ? "This site looks a little suspicious" : "This site has a minor risk flag"} (${Math.round(
         data.risk_score * 100,
       )}% risk). Be careful entering personal info.</span>
       <button id="cyberX-dismiss" style="
@@ -176,6 +174,7 @@ function showContextCheckToast(message, url) {
             </ul>
            </div>`
         : "";
+
 
     inner = `
   <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px;">
