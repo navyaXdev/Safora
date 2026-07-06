@@ -72,7 +72,7 @@ ask how "Suspicious"/"Medium" is defined, the answer is the table above, not
 "the extension decides."
 
 ```javascript
-// Current, reconciled version — API/frontend/src wherever tiering happens
+// Current, reconciled version — backend/frontend/src wherever tiering happens
 function getRiskTier(riskScore) {
     if (riskScore >= 0.7) return 'high';
     if (riskScore >= 0.5) return 'medium';
@@ -303,7 +303,7 @@ Response:
 
 ### Deployment (Render)
 
-- Root directory: `API` · Language: Python 3 · Build: `pip install -r requirements.txt`
+- Root directory: `backend` · Language: Python 3 · Build: `pip install -r requirements.txt`
 - Start: `gunicorn app:app` (not the Flask dev server — single-threaded, not
   production-suitable)
 - Python pinned via `.python-version` at repo root (`3.13.9`), confirmed
@@ -363,10 +363,10 @@ git clone https://github.com/navyaXdev/Safora.git
 cd Safora
 ```
 
-### 2. Backend Setup (`API` folder)
+### 2. Backend Setup (`backend` folder)
 
 ```bash
-cd API
+cd backend
 pip install -r requirements.txt
 python app.py
 # http://127.0.0.1:5000
