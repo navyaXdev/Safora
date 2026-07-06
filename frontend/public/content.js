@@ -3,7 +3,6 @@ let passwordWarningShown = false;
 chrome.runtime.onMessage.addListener((message) => {
 
   if (message.type === "SCAN_RESULT") {
-    // const { risk_score, label, reasons } = message.data;
     const tier = getRiskTier(message.data.risk_score);
     currentTier = tier;
 
@@ -223,7 +222,6 @@ function showContextCheckToast(message, url) {
   }
 }
 
-// if the user's website is flagged as medium/high risk and it tries to click an input then;
 document.addEventListener("focusin", (e) => {
   const ele = e.target; 
   const cfg = TIER_CONFIG[currentTier]
