@@ -337,33 +337,21 @@ Response:
 5. Scope is phishing detection specifically, not general malware or
    compromised-site detection.
 
-### Backend Setup
-
-```bash
-cd API
-pip install -r requirements.txt
-python app.py
-# http://127.0.0.1:5000
-
-curl -X POST http://127.0.0.1:5000/predict \
-  -H "Content-Type: application/json" \
-  -d '{"url": "http://paypa1.com/login"}'
-```
-
-Requires `scikit-learn==1.7.2` exactly — pinned to match `model.pkl`'s training
-environment; a mismatch can throw `InconsistentVersionWarning` and silently
-change output.
+> **Backend setup steps (clone, install, run, verify) are combined with the
+> frontend setup in the single unified [🚀 Setup](#-setup) section below —
+> follow that section start to finish.**
 
 ---
 
-## 🚀 Frontend Installation
+## 🚀 Setup
 
-Follow the steps below to set up the Safora Chrome Extension locally.
+Complete setup for both backend and frontend — in one place, in the correct order.
 
 ### Prerequisites
 
 Before you begin, ensure you have:
 
+* **Python 3** (see `.python-version` — pinned to `3.13.9`)
 * **Node.js** installed
 * **npm** (comes with Node.js)
 * **Google Chrome**
@@ -372,28 +360,72 @@ Before you begin, ensure you have:
 
 ```bash
 git clone https://github.com/navyaXdev/Safora.git
-cd Safora/frontend
+cd Safora
 ```
 
-### 2. Install Dependencies
+### 2. Backend Setup (`API` folder)
 
 ```bash
+cd API
+pip install -r requirements.txt
+python app.py
+# http://127.0.0.1:5000
+```
+
+Requires `scikit-learn==1.7.2` exactly — pinned to match `model.pkl`'s
+training environment; a mismatch can throw `InconsistentVersionWarning` and
+silently change output.
+
+**Verify it's working** (in a new terminal, leaving the backend running):
+
+```bash
+curl -X POST http://127.0.0.1:5000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"url": "http://paypa1.com/login"}'
+```
+
+If this returns a valid JSON response (`risk_score`, `label`, `reasons`),
+the backend is working correctly.
+
+### 3. Frontend Setup (`frontend` folder)
+
+```bash
+cd Safora/frontend
 npm install
 ```
 
-### 3. Configure the Backend URL
+### 4. Configure the Backend URL
 
-The frontend communicates with the backend server using its API URL.
-
-Update the backend URL in the following locations:
+The frontend communicates with the backend through its API URL. Create the
+`.env` file and keep the backend's location consistent in three places:
 
 * `.env`
 * `manifest.json`
 * `src/config.js`
 
+#### .env
+```bash
+VITE_BACKEND_URL=http://127.0.0.1:5000
+```
+(Use the above for a local backend; use `https://example.onrender.com` for
+the deployed backend.)
+
+#### manifest.json
+```json
+    "host_permissions": [
+        "http://127.0.0.1:5000/*",
+        "<all_urls>"
+    ]
+```
+
+#### src/config.js
+```js
+const API_URL = `http://127.0.0.1:5000/predict`;
+```
+
 > **Note:** Ensure the backend server is running before using the extension.
 
-### 4. Build the Extension
+### 5. Build the Extension
 
 Generate the production build:
 
@@ -403,7 +435,7 @@ npm run build
 
 This creates a `dist` folder containing the extension.
 
-### 5. Load the Extension in Chrome
+### 6. Load the Extension in Chrome
 
 1. Open Chrome.
 2. Navigate to:
