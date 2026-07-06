@@ -1,9 +1,16 @@
-# Grandma's Guardians (SAFORA) — Full Project README
+<p align="center">
+  <img src="./assets/safora_banner.png" alt="Safora - You're protected now" width="700"/>
+</p>
+
+<h1 align="center">Grandma's Guardians (SAFORA)</h1>
+<p align="center"><b>Real-time phishing URL detection — Chrome Extension + ML Backend</b></p>
 
 **Hackathon:** NYC CodeQuest 2026 — Challenge CYBER-01
 **Team:** Suraj (ML/Backend, Lead) · Mohit (Chrome Extension/Frontend) · Kartikey (UI/UX Designer) · Dinesh (Security Architecture & Rule Logic/Domain Knowledge)
 
-## Overview
+---
+
+## 📌 Overview
 
 Real-time phishing URL detection delivered as a Chrome extension. A user's
 browsing is scanned automatically; any URL can also be checked manually or via
@@ -11,9 +18,12 @@ right-click. Detection combines a trained ML risk score with an independent,
 plain-English rule-based explanation layer, so the extension tells people not
 just *that* a site is risky but *why*.
 
+SAFORA watches for suspicious links, fake login pages, and risky sender
+patterns while the user browses — warnings are always one click away.
+
 ---
 
-## System Architecture
+## 🏗️ System Architecture
 
 ```
 +-----------------------------------------------+
@@ -28,7 +38,7 @@ just *that* a site is risky but *why*.
                       v
 +-----------------------------------------------+
 |  Flask API (Suraj) - deployed on Render        |
-|  https://safora.onrender.com/predict           |
+|  https://example.onrender.com/predict           |
 +---------------------+---------------------------+
 |  extract_features()      get_reasons()         |
 |  (11 lexical features)   (7 rules, Kartikey)   |
@@ -73,7 +83,7 @@ function getRiskTier(riskScore) {
 
 ---
 
-## Frontend — Chrome Extension (Mohit)
+## 🖥️ Frontend — Chrome Extension (Mohit)
 
 ### Features
 
@@ -116,12 +126,12 @@ scores, and UI state are fully isolated per tab.
 
 ---
 
-## Backend — ML + Flask API (Suraj)
+## ⚙️ Backend — ML + Flask API (Suraj)
 
 ### Status
 
 **Deployed and verified end-to-end.** Live at
-`https://safora.onrender.com/predict`, tested against the deployed instance
+`https://example.onrender.com/predict`, tested against the deployed instance
 (not just locally) as of this session.
 
 ### Design Principle — Decoupling
@@ -310,10 +320,9 @@ Response:
    words like "login"/"auth"/"verify" anywhere in the URL and can't
    distinguish a genuine auth page from a phishing lure using the same
    vocabulary. Structural limitation of keyword-density features, not a
-   training-data bug. Note: this scores in the "High" frontend tier
-   (>= 0.7 is not met at 0.769... verify against final tier table — 0.769 falls
-   in "High" per the >= 0.7 boundary), so the UI will show this as a strong
-   warning on a real bank login page if demoed live.
+   training-data bug. This score falls in the "High" frontend tier (>= 0.7),
+   so the UI will show this as a strong warning on a real bank login page if
+   demoed live.
 2. **`mail.google.com` — path-dependent, not model-version-dependent.**
    Resolved a prior discrepancy: bare `mail.google.com/` scores 0.009
    (correct); the deep-path `mail.google.com/mail/u/0/#inbox` scores 0.732
@@ -328,7 +337,7 @@ Response:
 5. Scope is phishing detection specifically, not general malware or
    compromised-site detection.
 
-### Setup
+### Backend Setup
 
 ```bash
 cd API
@@ -346,3 +355,97 @@ environment; a mismatch can throw `InconsistentVersionWarning` and silently
 change output.
 
 ---
+
+## 🚀 Frontend Installation
+
+Follow the steps below to set up the Safora Chrome Extension locally.
+
+### Prerequisites
+
+Before you begin, ensure you have:
+
+* **Node.js** installed
+* **npm** (comes with Node.js)
+* **Google Chrome**
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/navyaXdev/Safora.git
+cd Safora/frontend
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure the Backend URL
+
+The frontend communicates with the backend server using its API URL.
+
+Update the backend URL in the following locations:
+
+* `.env`
+* `manifest.json`
+* `src/config.js`
+
+> **Note:** Ensure the backend server is running before using the extension.
+
+### 4. Build the Extension
+
+Generate the production build:
+
+```bash
+npm run build
+```
+
+This creates a `dist` folder containing the extension.
+
+### 5. Load the Extension in Chrome
+
+1. Open Chrome.
+2. Navigate to:
+
+```
+chrome://extensions
+```
+
+3. Enable **Developer mode** (top-right).
+4. Click **Load unpacked**.
+5. Select the generated `dist` folder.
+
+The Safora extension is now installed and ready to use.
+
+### Development
+
+Whenever you make changes to the source code:
+
+```bash
+npm run build
+```
+
+Then reload the extension from the **Chrome Extensions** page by clicking the **Reload** button on the Safora extension card.
+
+### Troubleshooting
+
+**Extension fails to load**
+* Make sure you selected the **dist** folder, not the project root.
+* Run `npm run build` again if the `dist` folder is missing.
+
+**Backend requests fail**
+* Verify that the backend server is running.
+* Ensure the backend URL is correctly configured in:
+  * `.env`
+  * `manifest.json`
+  * `src/config.js`
+
+**Changes are not reflected**
+1. Open `chrome://extensions`
+2. Click **Reload** on the Safora extension.
+3. Refresh the webpage where the extension is being used.
+
+---
+
+<p align="center"><i>Built with ❤️ for NYC CodeQuest 2026 by Team SAFORA</i></p>
