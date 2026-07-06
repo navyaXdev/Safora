@@ -439,7 +439,25 @@ Then reload the extension from the **Chrome Extensions** page by clicking the **
 * Ensure the backend URL is correctly configured in:
   * `.env`
   * `manifest.json`
-  * `src/config.js`
+  * `config.js`
+
+#### .env
+```bash
+VITE_BACKEND_URL= https://example.onrender.com
+```
+#### manifest.json
+```json
+    "host_permissions": [
+        
+        "https://example.onrender.com/*",
+        "<all_urls>"
+    ]
+```
+
+#### config.js
+```js
+const API_URL = `https://example.onrender.com/predict` ;
+```
 
 **Changes are not reflected**
 1. Open `chrome://extensions`
