@@ -448,4 +448,4 @@ Then reload the extension from the **Chrome Extensions** page by clicking the **
 
 ---
 
-<p align="center"><i>Built with ❤️ for NYC CodeQuest 2026 by Team SAFORA</i></p>
+<p align="center"><i>Built with ❤️ for NYC CodeQuest 2026 by Team CyberX</i></p>
