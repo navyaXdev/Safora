@@ -15,9 +15,9 @@ def evaluate_phishing_rules(url):
         url_to_parse = url
 
     parsed = urllib.parse.urlparse(url_to_parse)
-    domain = parsed.netloc.split(':')[0]  # Isolate domain, ignoring ports
+    domain = parsed.netloc.split(':')[0]  # ignoring ports
 
-    # Rule 1: IP Address
+    # Rule 1: IP address check
     try:
         ipaddress.ip_address(domain)
         triggered_rules.append({
@@ -28,7 +28,7 @@ def evaluate_phishing_rules(url):
     except ValueError:
         pass
 
-    # Rule 2: Digit substitution for letters
+    # Rule 2: digit substitution check
     domain_body = domain.rsplit('.', 1)[0] if '.' in domain else domain
     if (re.search(r'[a-zA-Z][01]+[a-zA-Z]', domain_body) or
         re.search(r'[a-zA-Z][01]+$', domain_body) or
@@ -39,7 +39,7 @@ def evaluate_phishing_rules(url):
             "reason": "This link is pretending to be a well-known website by swapping letters for numbers."
         })
 
-    # Rule 3: No HTTPS
+    # Rule 3: HTTPS check
     if parsed.scheme.lower() != 'https':
         triggered_rules.append({
             "rule": "Rule 3",
@@ -47,12 +47,10 @@ def evaluate_phishing_rules(url):
             "reason": "This link is not secure — any information you enter can be seen by others."
         })
 
-    # Rule 4: Urgent keywords - only counts as a reason if corroborated
-    # by at least one other signal, to avoid false positives on clean domains
-    # with incidentally-matching path text (e.g. github.com/account-suspended)
+    # Rule 4: urgent keywords, needs another signal to trigger
     urgent_keywords = ['verify-now', 'account-suspended', 'login-alert', 'confirm-identity']
     rule4_triggered = any(keyword in url_to_parse.lower() for keyword in urgent_keywords)
-    other_rules_triggered = len(triggered_rules) > 0  # check after rules 1,2,3 run
+    other_rules_triggered = len(triggered_rules) > 0
 
     if rule4_triggered and other_rules_triggered:
         triggered_rules.append({
@@ -61,9 +59,7 @@ def evaluate_phishing_rules(url):
             "reason": "This link is trying to scare you into clicking quickly — that's a common trick used by scammers."
         })
 
-    # Rule 5: Excessive subdomains (> 3 dots in the domain)
-    # RESTORED (Suraj, July 3): this rule was dropped entirely in the last
-    # edit — confirmed missing by diffing against the previous working version.
+    # Rule 5: too many subdomains
     if domain.count('.') > 3:
         triggered_rules.append({
             "rule": "Rule 5",
@@ -71,13 +67,7 @@ def evaluate_phishing_rules(url):
             "reason": "This link has an unusually complicated address — scammers do this to hide the real website."
         })
 
-    # FIX (Suraj, July 3): this return statement was missing entirely.
-    # triggered_rules was built correctly internally but the function fell
-    # off the end and returned None, so every single URL — including
-    # obvious phishing examples — printed "No Rules Triggered (Pass)".
-    # Confirmed via isolated repro: Rule 1 and Rule 3 fired internally for
-    # 192.168.1.1 but the function returned None regardless.
-        # Rule 6: Downloadable file warning
+    # Rule 6: downloadable file check
     download_extensions = (
         '.exe', '.msi', '.zip', '.rar', '.7z',
         '.apk', '.iso', '.bat', '.cmd',
@@ -92,9 +82,8 @@ def evaluate_phishing_rules(url):
             "trigger": "URL points to a downloadable file",
             "reason": "This link downloads a file. Downloaded files can sometimes contain malware or harmful software. Only download files from trusted sources."            
         })
-    
-    # Rule 7: Suspicious top-level domain
-    # Gated same as Rule 4 — TLD alone isn't a strong signal (legitimate NGOs/nonprofits use free ccTLDs like .tk/.ml), so require corroboration.
+
+    # Rule 7: suspicious TLD, needs another signal to trigger
     suspicious_tlds = ['tk', 'pw', 'xyz', 'top', 'gq', 'ml', 'cf', 'ga']
     tld = domain.rsplit('.', 1)[-1].lower() if '.' in domain else ''
     if tld in suspicious_tlds and len(triggered_rules) > 0:
@@ -112,12 +101,6 @@ def get_reasons(url):
     Integration entry point for app.py.
     Returns list of plain-English reason strings (not rule names) for the
     'reasons' field in the Flask API response.
-
-    NOTE: kept as an independent implementation (not calling
-    evaluate_phishing_rules internally) so this file's CLI/testing behavior
-    and the Flask integration path can be verified separately. Both must be
-    updated together if a rule changes — this is a known fragility, flagged
-    for consolidation post-hackathon.
     """
     if not url.startswith(('http://', 'https://')):
         url_to_parse = 'http://' + url
@@ -148,12 +131,7 @@ def get_reasons(url):
     if https_matched:
         reasons.append("This link is not secure — any information you enter can be seen by others.")
 
-    # Rule 4 corroboration gate mirrored here to match evaluate_phishing_rules.
-    # FIX (Suraj, July 3): previously this checked urgent keywords in
-    # isolation with no corroboration gate, so get_reasons() and
-    # evaluate_phishing_rules() disagreed on the same URL
-    # (e.g. github.com/account-suspended) — the exact inconsistency that
-    # breaks Flask/extension integration since app.py calls get_reasons().
+    # same gating logic as evaluate_phishing_rules, keep both in sync
     other_signals_matched = ip_matched or digit_sub_matched or https_matched
     urgent_keywords = ['verify-now', 'account-suspended', 'login-alert', 'confirm-identity']
     rule4_matched = any(keyword in url_to_parse.lower() for keyword in urgent_keywords)
@@ -163,7 +141,6 @@ def get_reasons(url):
     if domain.count('.') > 3:
         reasons.append("This link has an unusually complicated address — scammers do this to hide the real website.")
 
-        # Rule 6: Downloadable file warning
     download_extensions = (
         '.exe', '.msi', '.zip', '.rar', '.7z',
         '.apk', '.iso', '.bat', '.cmd',
@@ -175,14 +152,11 @@ def get_reasons(url):
             "This link downloads a file. Downloaded files can sometimes contain malware or harmful software. Only download files from trusted sources."
         )
 
-    # Rule 7: Suspicious top-level domain
-    # TLD list mirrors the model's suspicious_tld feature list in train.py/app.py —
-    # if you change one, change both, same fragility flagged for Rule 4.
     suspicious_tlds = ['tk', 'pw', 'xyz', 'top', 'gq', 'ml', 'cf', 'ga']
     tld = domain.rsplit('.', 1)[-1].lower() if '.' in domain else ''
     if tld in suspicious_tlds and len(reasons) > 0:
         reasons.append("This website's address ending is one that's often used for scam sites.")
-    
+
     return reasons
 
 
