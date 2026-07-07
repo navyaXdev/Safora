@@ -4,7 +4,7 @@ import joblib
 import re
 import math
 from collections import Counter
-from phishing_rules_fixed_v2 import get_reasons
+from phishing_rules import get_reasons
 import os
 
 app = Flask(__name__)
