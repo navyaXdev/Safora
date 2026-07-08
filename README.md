@@ -342,6 +342,27 @@ Response:
 > follow that section start to finish.**
 
 ---
+### ⚡ Quick Setup (Prebuilt Extension)
+
+If you just want to use the extension without building it locally:
+
+1. Download **`safora-extension-v1.0.0.zip`** from the GitHub Release page:
+   https://github.com/navyaXdev/Safora/releases/tag/v1.0.0
+
+2. Extract the ZIP file.
+
+3. Open Chrome and go to:
+chrome://extensions
+
+4. Enable **Developer mode** (top-right).
+
+5. Click **Load unpacked**.
+
+6. Select the extracted (unzipped) **`safora-extension-v1.0.0`** folder.
+
+That's it! The Safora extension is now installed and ready to use.
+
+> **Note:** This method is for users who only want to install the extension. Developers who want to modify or test the source code locally should follow the complete setup instructions below.
 
 ## 🚀 Setup
 
