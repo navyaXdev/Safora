@@ -41,7 +41,7 @@ patterns while the user browses — warnings are always one click away.
 |  https://example.onrender.com/predict           |
 +---------------------+---------------------------+
 |  extract_features()      get_reasons()         |
-|  (11 lexical features)   (7 rules, Kartikey)   |
+|  (11 lexical features)   (7 rules, Dinesh)   |
 |         v                       v              |
 |  RandomForestClassifier   Rule-based checks     |
 |  -> risk_score (0-1)      -> reasons[]          |
@@ -137,7 +137,7 @@ scores, and UI state are fully isolated per tab.
 ### Design Principle — Decoupling
 
 `risk_score` comes exclusively from `model.predict_proba()`. `reasons` comes
-exclusively from an independent rule engine (Kartikey). Neither depends on the
+exclusively from an independent rule engine (Dinesh). Neither depends on the
 other's internals — this let ML and rule-logic work happen in parallel, and it
 means the system can still explain itself even where the model's decision
 boundary is hard to interpret. The cost, disclosed below: the two can
@@ -262,7 +262,7 @@ matching between `train.py` and `app.py`), but it's a latent risk — if the two
 and predictions will silently be wrong. Fix (optional, ~10 min): wrap model
 input in a `pd.DataFrame(..., columns=feature_cols)` in both files.
 
-### Rule Layer (Kartikey) — independent of the model
+### Rule Layer (Dinesh) — independent of the model
 
 `phishing_rules_fixed_v2.py`, 7 rules:
 
