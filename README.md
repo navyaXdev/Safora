@@ -390,7 +390,7 @@ cd Safora
 cd backend
 pip install -r requirements.txt
 python app.py
-# http://127.0.0.1:5000
+# http://0.0.0.0:5000
 ```
 
 Requires `scikit-learn==1.7.2` exactly — pinned to match `model.pkl`'s
@@ -400,7 +400,7 @@ silently change output.
 **Verify it's working** (in a new terminal, leaving the backend running):
 
 ```bash
-curl -X POST http://127.0.0.1:5000/predict \
+curl -X POST http://0.0.0.0:5000/predict \
   -H "Content-Type: application/json" \
   -d '{"url": "http://paypa1.com/login"}'
 ```
@@ -426,7 +426,7 @@ The frontend communicates with the backend through its API URL. Create the
 
 #### .env
 ```bash
-VITE_BACKEND_URL=http://127.0.0.1:5000
+VITE_BACKEND_URL=http://0.0.0.0:5000
 ```
 (Use the above for a local backend; use `https://example.onrender.com` for
 the deployed backend.)
@@ -434,14 +434,14 @@ the deployed backend.)
 #### manifest.json
 ```json
     "host_permissions": [
-        "http://127.0.0.1:5000/*",
+        "http://0.0.0.0:5000/*",
         "<all_urls>"
     ]
 ```
 
 #### src/config.js
 ```js
-const API_URL = `http://127.0.0.1:5000/predict`;
+const API_URL = `http://0.0.0.0:5000/predict`;
 ```
 
 > **Note:** Ensure the backend server is running before using the extension.
