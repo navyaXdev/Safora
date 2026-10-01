@@ -12,8 +12,8 @@ export default function ThemeToggle({ className = '' }) {
       type="button"
       className={`relative inline-flex items-center justify-center p-2 rounded-full transition-all duration-300 cursor-pointer ${
         isDark
-          ? 'bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-emerald-300 shadow-sm'
-          : 'bg-black/[0.04] hover:bg-black/[0.08] border border-black/10 text-emerald-700 shadow-sm'
+          ? 'bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-[#00A878] hover:text-[#34D399] shadow-xs'
+          : 'bg-black/[0.04] hover:bg-black/[0.08] border border-black/[0.08] text-[#087A5B] hover:text-[#064D3D] shadow-xs'
       } ${className}`}
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
       title={`Switch to ${isDark ? 'light' : 'dark'} mode`}

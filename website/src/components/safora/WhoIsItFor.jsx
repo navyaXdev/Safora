@@ -13,33 +13,33 @@ const audiences = [
 
 export default function WhoIsItFor() {
   return (
-    <section id="who-is-it-for" className="relative py-36 sm:py-44 bg-[#F3F2EC] dark:bg-[#080c09] border-y border-black/[0.06] dark:border-white/[0.05] transition-colors duration-400">
+    <section id="who-is-it-for" className="relative py-36 sm:py-44 bg-[#E9E5DC] dark:bg-[#070908] transition-colors duration-400">
       <div className="relative max-w-[1400px] mx-auto px-6 sm:px-10 grid lg:grid-cols-12 gap-16 lg:gap-12 items-start">
         
         {/* Statement */}
         <Reveal className="lg:col-span-5">
           <Eyebrow align="left">Who It's For</Eyebrow>
-          <h2 className="mt-8 font-serif text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.08] tracking-[-0.02em] text-[#141916] dark:text-white">
+          <h2 className="mt-8 font-serif text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.08] tracking-[-0.02em] text-[#171B18] dark:text-[#F3F2EC]">
             Made for everyday internet users.
           </h2>
           <div className="mt-10 h-px w-24 eyebrow-line" />
-          <p className="mt-8 font-serif italic text-2xl sm:text-3xl leading-snug text-emerald-700 dark:text-emerald-400 max-w-md font-normal">
+          <p className="mt-8 font-serif italic text-2xl sm:text-3xl leading-snug text-[#087A5B] dark:text-[#00A878] max-w-md font-normal">
             You don't need to be a cybersecurity expert to understand a security warning.
           </p>
         </Reveal>
 
         {/* Audience List */}
         <Reveal delay={0.18} className="lg:col-span-6 lg:col-start-7">
-          <ul className="border-y border-black/[0.08] dark:border-white/[0.08] divide-y divide-black/[0.06] dark:divide-white/[0.06]">
+          <ul className="border-y border-[#D9D6CD] dark:border-white/[0.08] divide-y divide-[#D9D6CD] dark:divide-white/[0.06]">
             {audiences.map((a, i) => (
               <li
                 key={a.label}
                 className="group flex items-center gap-6 py-7 transition-colors duration-400"
               >
-                <div className="w-10 h-10 rounded-2xl bg-white dark:bg-white/[0.03] border border-black/[0.06] dark:border-white/[0.06] flex items-center justify-center text-[#4A544E] dark:text-slate-300 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 group-hover:border-emerald-500/40 shadow-xs transition-all duration-300 shrink-0">
+                <div className="w-10 h-10 rounded-2xl bg-[#FAF8F2] dark:bg-[#0D1210] border border-[#D9D6CD] dark:border-white/[0.06] flex items-center justify-center text-[#5E665F] dark:text-[#9BA7A0] group-hover:text-[#087A5B] dark:group-hover:text-[#00A878] group-hover:border-[#087A5B]/40 dark:group-hover:border-[#00A878]/40 shadow-warm-sm transition-all duration-300 shrink-0">
                   <a.icon className="w-4 h-4 stroke-[1.5]" />
                 </div>
-                <span className="text-base sm:text-lg text-[#2d3630] dark:text-slate-300 font-light transition-colors group-hover:text-[#141916] dark:group-hover:text-white">
+                <span className="text-base sm:text-lg text-[#171B18] dark:text-[#F3F2EC] font-light transition-colors group-hover:text-[#087A5B] dark:group-hover:text-white">
                   {a.label}
                 </span>
               </li>

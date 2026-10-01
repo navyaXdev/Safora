@@ -27,19 +27,19 @@ const cards = [
 
 export default function WhySafora() {
   return (
-    <section id="why-safora" className="relative py-36 sm:py-44 bg-[#F3F2EC] dark:bg-[#080c09] border-y border-black/[0.06] dark:border-white/[0.05] transition-colors duration-400">
+    <section id="why-safora" className="relative py-36 sm:py-44 bg-[#F0EEE7] dark:bg-[#070908] transition-colors duration-400">
       <div className="relative max-w-[1400px] mx-auto px-6 sm:px-10">
         
         <Reveal>
           <div className="max-w-3xl">
             <Eyebrow align="left">Why SAFORA</Eyebrow>
-            <h2 className="mt-8 font-serif text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.08] tracking-[-0.02em] text-[#141916] dark:text-white">
+            <h2 className="mt-8 font-serif text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.08] tracking-[-0.02em] text-[#171B18] dark:text-[#F3F2EC]">
               Online threats aren't always easy to spot.
             </h2>
-            <p className="mt-8 text-base sm:text-lg text-[#4A544E] dark:text-slate-300 font-light leading-[1.9] max-w-2xl">
+            <p className="mt-8 text-base sm:text-lg text-[#5E665F] dark:text-[#9BA7A0] font-light leading-[1.9] max-w-2xl">
               Phishing websites can look surprisingly similar to websites you already trust. A familiar-looking login page or a convincing link can make it difficult to know what's safe.
             </p>
-            <p className="mt-4 text-base sm:text-lg text-emerald-700 dark:text-emerald-400 font-normal max-w-2xl">
+            <p className="mt-4 text-base sm:text-lg text-[#087A5B] dark:text-[#00A878] font-normal max-w-2xl">
               SAFORA adds an extra layer of awareness while you browse.
             </p>
           </div>
@@ -52,20 +52,20 @@ export default function WhySafora() {
               <motion.div
                 whileHover={{ y: -6 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="group border-t border-black/10 dark:border-white/[0.08] hover:border-emerald-500/40 pt-8 transition-colors duration-400"
+                className="group border-t border-[#D9D6CD] dark:border-white/[0.08] hover:border-[#087A5B]/40 dark:hover:border-[#00A878]/40 pt-8 transition-colors duration-400"
               >
                 <div className="flex items-center justify-between mb-8">
-                  <span className="font-mono text-sm tracking-[0.25em] text-emerald-700 dark:text-emerald-400/80 font-semibold">{c.num}</span>
-                  <div className="w-10 h-10 rounded-2xl bg-white dark:bg-white/[0.03] border border-black/10 dark:border-white/[0.06] flex items-center justify-center text-[#4A544E] dark:text-slate-300 group-hover:text-emerald-700 dark:group-hover:text-emerald-300 group-hover:border-emerald-500/40 shadow-xs transition-all duration-300">
+                  <span className="font-mono text-sm tracking-[0.25em] text-[#087A5B] dark:text-[#00A878] font-semibold">{c.num}</span>
+                  <div className="w-10 h-10 rounded-2xl bg-[#FAF8F2] dark:bg-[#0D1210] border border-[#D9D6CD] dark:border-white/[0.08] flex items-center justify-center text-[#5E665F] dark:text-[#9BA7A0] group-hover:text-[#087A5B] dark:group-hover:text-[#00A878] group-hover:border-[#087A5B]/40 dark:group-hover:border-[#00A878]/40 shadow-warm-sm transition-all duration-300">
                     <c.icon className="w-4 h-4 stroke-[1.5]" />
                   </div>
                 </div>
                 
-                <h3 className="font-serif text-2xl font-medium text-[#141916] dark:text-white mb-3">
+                <h3 className="font-serif text-2xl font-medium text-[#171B18] dark:text-[#F3F2EC] mb-3">
                   {c.title}
                 </h3>
                 
-                <p className="text-sm text-[#55635B] dark:text-slate-400 leading-[1.85] font-light">
+                <p className="text-sm text-[#5E665F] dark:text-[#9BA7A0] leading-[1.85] font-light">
                   {c.text}
                 </p>
               </motion.div>

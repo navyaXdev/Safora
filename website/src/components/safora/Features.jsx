@@ -55,13 +55,13 @@ const supporting = [
 
 export default function Features({ onOpenScanner }) {
   return (
-    <section id="features" className="relative py-36 sm:py-44 bg-[#FAF9F5] dark:bg-[#050706] transition-colors duration-400">
+    <section id="features" className="relative py-36 sm:py-44 bg-[#E8ECE6] dark:bg-[#0D1210] border-y border-[#D9D6CD] dark:border-white/[0.06] transition-colors duration-400">
       <div className="relative max-w-[1400px] mx-auto px-6 sm:px-10">
         
         <Reveal>
           <div className="max-w-2xl mx-auto text-center">
             <Eyebrow>Features</Eyebrow>
-            <h2 className="mt-8 font-serif text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.08] tracking-[-0.02em] text-[#141916] dark:text-white">
+            <h2 className="mt-8 font-serif text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.08] tracking-[-0.02em] text-[#171B18] dark:text-[#F3F2EC]">
               Everything you need for safer browsing.
             </h2>
           </div>
@@ -74,17 +74,17 @@ export default function Features({ onOpenScanner }) {
               <motion.div
                 whileHover={{ y: -6 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative h-full bg-white dark:bg-[#090e0b]/90 rounded-[32px] p-10 sm:p-14 overflow-hidden border border-black/[0.07] dark:border-white/[0.08] shadow-[0_15px_35px_rgba(20,25,22,0.04)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.7)] transition-all duration-400"
+                className="group relative h-full bg-[#FAF8F2] dark:bg-[#070908] rounded-[28px] p-10 sm:p-14 overflow-hidden border border-[#D9D6CD] dark:border-white/[0.08] shadow-warm dark:shadow-[0_20px_50px_rgba(0,0,0,0.7)] transition-all duration-400"
               >
-                <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-emerald-600/[0.05] blur-[80px] pointer-events-none" />
+                <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-[#087A5B]/[0.04] dark:bg-[#00A878]/[0.05] blur-[80px] pointer-events-none" />
                 <div className="relative">
-                  <div className="w-14 h-14 rounded-2xl border border-emerald-500/20 dark:border-emerald-400/20 bg-emerald-50/80 dark:bg-emerald-500/[0.06] flex items-center justify-center mb-8 shadow-xs">
-                    <f.icon className="w-6 h-6 text-emerald-700 dark:text-emerald-400" strokeWidth={1.3} />
+                  <div className="w-14 h-14 rounded-2xl border border-[#087A5B]/20 dark:border-[#00A878]/25 bg-[#F0EEE7] dark:bg-[#111814] flex items-center justify-center mb-8 shadow-xs">
+                    <f.icon className="w-6 h-6 text-[#087A5B] dark:text-[#00A878]" strokeWidth={1.3} />
                   </div>
-                  <h3 className="font-serif text-2xl sm:text-3xl font-medium text-[#141916] dark:text-white mb-4">
+                  <h3 className="font-serif text-2xl sm:text-3xl font-medium text-[#171B18] dark:text-[#F3F2EC] mb-4">
                     {f.title}
                   </h3>
-                  <p className="text-base text-[#4A544E] dark:text-slate-300 leading-[1.85] font-light max-w-md">
+                  <p className="text-base text-[#5E665F] dark:text-[#9BA7A0] leading-[1.85] font-light max-w-md">
                     {f.text}
                   </p>
                 </div>
@@ -100,28 +100,28 @@ export default function Features({ onOpenScanner }) {
               <motion.div
                 whileHover={{ y: -5 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="group h-full rounded-[28px] border border-black/[0.06] dark:border-white/[0.06] hover:border-emerald-500/40 bg-white dark:bg-[#080b09]/80 p-8 backdrop-blur-xl shadow-xs dark:shadow-md transition-all duration-400 flex flex-col justify-between"
+                className="group h-full rounded-[24px] border border-[#D9D6CD] dark:border-white/[0.06] hover:border-[#087A5B]/40 dark:hover:border-[#00A878]/40 bg-[#FAF8F2] dark:bg-[#070908] p-8 shadow-warm-sm dark:shadow-md transition-all duration-400 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-7">
-                    <div className="w-10 h-10 rounded-2xl bg-[#F3F2EC] dark:bg-white/[0.03] border border-black/[0.06] dark:border-white/[0.06] flex items-center justify-center text-[#4A544E] dark:text-slate-300 group-hover:text-emerald-700 dark:group-hover:text-emerald-300 group-hover:border-emerald-500/40 transition-all duration-300 shadow-xs">
+                    <div className="w-10 h-10 rounded-2xl bg-[#F0EEE7] dark:bg-[#111814] border border-[#D9D6CD] dark:border-white/[0.06] flex items-center justify-center text-[#5E665F] dark:text-[#9BA7A0] group-hover:text-[#087A5B] dark:group-hover:text-[#00A878] group-hover:border-[#087A5B]/40 dark:group-hover:border-[#00A878]/40 transition-all duration-300 shadow-xs">
                       <f.icon className="w-4 h-4 stroke-[1.5]" />
                     </div>
                   </div>
                   
-                  <h3 className="font-serif text-xl font-medium text-[#141916] dark:text-white mb-2 leading-snug">
+                  <h3 className="font-serif text-xl font-medium text-[#171B18] dark:text-[#F3F2EC] mb-2 leading-snug">
                     {f.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#55635B] dark:text-slate-400 leading-[1.8] font-light">
+                  <p className="text-xs sm:text-sm text-[#5E665F] dark:text-[#9BA7A0] leading-[1.8] font-light">
                     {f.text}
                   </p>
                 </div>
 
                 {f.hasAction && onOpenScanner && (
-                  <div className="mt-6 pt-4 border-t border-black/[0.06] dark:border-white/[0.05]">
+                  <div className="mt-6 pt-4 border-t border-[#D9D6CD] dark:border-white/[0.05]">
                     <button
                       onClick={onOpenScanner}
-                      className="text-xs font-mono font-medium text-emerald-700 dark:text-emerald-300 hover:text-emerald-800 dark:hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer"
+                      className="text-xs font-mono font-medium text-[#087A5B] dark:text-[#00A878] hover:text-[#07503F] dark:hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer"
                     >
                       <span>Try Scanner Tool</span>
                       <ArrowUpRight className="w-3.5 h-3.5" />

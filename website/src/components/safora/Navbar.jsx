@@ -27,7 +27,7 @@ export default function Navbar({ onOpenScanner }) {
       transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "backdrop-blur-2xl bg-[#FAF9F5]/90 dark:bg-[#050706]/85 border-b border-black/[0.06] dark:border-white/[0.06] shadow-[0_10px_30px_rgba(20,25,22,0.04)] dark:shadow-[0_10px_30px_rgba(0,0,0,0.7)] py-3.5"
+          ? "backdrop-blur-2xl bg-[#F0EEE7]/90 dark:bg-[#070908]/85 border-b border-[#D9D6CD] dark:border-white/[0.06] shadow-[0_8px_30px_rgba(30,35,30,0.05)] dark:shadow-[0_10px_30px_rgba(0,0,0,0.7)] py-3.5"
           : "bg-transparent py-5 border-b border-transparent"
       }`}
     >
@@ -35,32 +35,36 @@ export default function Navbar({ onOpenScanner }) {
         {/* Brand / Logo */}
         <button
           onClick={() => go("#home")}
-          className="group flex items-center gap-3.5 transition-transform duration-300 cursor-pointer focus-visible:outline-none"
+          className="group flex items-center gap-3 sm:gap-3.5 lg:gap-4 transition-transform duration-300 cursor-pointer focus-visible:outline-none select-none py-0.5"
+          aria-label="SAFORA Home"
         >
-          <div className="relative w-8 h-8 rounded-xl overflow-hidden ring-1 ring-black/10 dark:ring-white/10 group-hover:ring-emerald-500/60 transition-all shadow-xs">
+          {/* Prominent Shield/Icon — approx 25-30% larger (32px -> 42px on desktop) */}
+          <div className="relative w-9 h-9 sm:w-10 sm:h-10 lg:w-[42px] lg:h-[42px] rounded-[11px] sm:rounded-[13px] lg:rounded-[14px] overflow-hidden ring-1 ring-black/[0.08] dark:ring-white/[0.08] group-hover:ring-[#087A5B]/60 dark:group-hover:ring-[#00A878]/60 transition-all shadow-xs shrink-0">
             <img
               src={LOGO_URL}
               alt="SAFORA logo"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </div>
-          <div className="flex flex-col text-left">
-            <span className="font-serif text-xl font-bold tracking-tight text-[#141916] dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors">
+
+          {/* Wordmark & Subtitle Balanced Column */}
+          <div className="flex flex-col text-left justify-center">
+            <span className="font-serif text-[1.32rem] sm:text-[1.45rem] lg:text-[1.58rem] font-bold tracking-[-0.015em] leading-none text-[#171B18] dark:text-[#F3F2EC] group-hover:text-[#087A5B] dark:group-hover:text-[#00A878] transition-colors">
               SAFORA
             </span>
-            <span className="text-[9px] uppercase font-mono tracking-[0.25em] text-emerald-700 dark:text-emerald-400 -mt-1 hidden sm:block font-medium">
+            <span className="text-[9px] sm:text-[9.5px] lg:text-[10px] uppercase font-mono tracking-[0.26em] sm:tracking-[0.28em] text-[#087A5B] dark:text-[#00A878] mt-1 sm:mt-1.5 hidden xs:block font-semibold leading-none">
               Web Protection
             </span>
           </div>
         </button>
 
         {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center gap-8 px-6 py-2 rounded-full bg-black/[0.03] dark:bg-[#090e0b]/70 border border-black/[0.06] dark:border-white/[0.06] backdrop-blur-xl">
+        <div className="hidden lg:flex items-center gap-8 px-7 py-2 rounded-full bg-[#E9E5DC]/80 dark:bg-[#0D1210]/70 border border-[#D9D6CD] dark:border-white/[0.06] backdrop-blur-xl">
           {NAV_LINKS.map((link) => (
             <button
               key={link.href}
               onClick={() => go(link.href)}
-              className="text-[11px] uppercase tracking-[0.22em] text-[#4A544E] hover:text-[#141916] dark:text-[#9BAAA0] dark:hover:text-white transition-colors duration-200 cursor-pointer font-medium"
+              className="text-[11px] uppercase tracking-[0.24em] text-[#5E665F] hover:text-[#087A5B] dark:text-[#9BA7A0] dark:hover:text-[#00A878] transition-colors duration-200 cursor-pointer font-medium"
             >
               {link.label}
             </button>
@@ -76,15 +80,15 @@ export default function Navbar({ onOpenScanner }) {
             href={GITHUB_RELEASE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase text-white bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 border border-emerald-400/30 shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] transition-all duration-300 cursor-pointer"
+            className="hidden sm:inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase text-[#FAF8F2] dark:text-white bg-[#087A5B] hover:bg-[#07503F] dark:bg-[#00A878] dark:hover:bg-[#087A5B] border border-[#087A5B]/30 dark:border-[#00A878]/30 shadow-[0_4px_16px_rgba(8,122,91,0.2)] dark:shadow-[0_4px_20px_rgba(0,168,120,0.25)] transition-all duration-300 cursor-pointer"
           >
             <span>Get SAFORA</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-emerald-100" />
+            <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
 
           <button
             onClick={() => setOpen(!open)}
-            className="lg:hidden p-2 text-[#141916] dark:text-slate-200 hover:text-emerald-600 dark:hover:text-white rounded-xl bg-black/[0.04] dark:bg-white/[0.04] border border-black/10 dark:border-white/10"
+            className="lg:hidden p-2 text-[#171B18] dark:text-[#F3F2EC] hover:text-[#087A5B] dark:hover:text-[#00A878] rounded-xl bg-[#E9E5DC] dark:bg-white/[0.04] border border-[#D9D6CD] dark:border-white/10"
             aria-label="Toggle menu"
           >
             {open ? <X className="w-5 h-5" strokeWidth={1.5} /> : <Menu className="w-5 h-5" strokeWidth={1.5} />}
@@ -100,25 +104,25 @@ export default function Navbar({ onOpenScanner }) {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:hidden overflow-hidden backdrop-blur-2xl bg-[#FAF9F5]/98 dark:bg-[#070a08]/98 border-t border-black/10 dark:border-white/10 shadow-2xl"
+            className="lg:hidden overflow-hidden backdrop-blur-2xl bg-[#F0EEE7]/98 dark:bg-[#070908]/98 border-t border-[#D9D6CD] dark:border-white/10 shadow-2xl"
           >
             <div className="px-6 py-6 flex flex-col space-y-1">
               {NAV_LINKS.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => go(link.href)}
-                  className="py-3 text-left text-xs uppercase tracking-[0.22em] text-[#4A544E] dark:text-slate-300 hover:text-[#141916] dark:hover:text-white transition-colors font-medium"
+                  className="py-3 text-left text-xs uppercase tracking-[0.24em] text-[#5E665F] dark:text-[#9BA7A0] hover:text-[#087A5B] dark:hover:text-[#00A878] transition-colors font-medium"
                 >
                   {link.label}
                 </button>
               ))}
-              <div className="pt-4 border-t border-black/10 dark:border-white/10 flex flex-col gap-2.5">
+              <div className="pt-4 border-t border-[#D9D6CD] dark:border-white/10 flex flex-col gap-2.5">
                 <a
                   href={GITHUB_RELEASE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setOpen(false)}
-                  className="w-full py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold uppercase tracking-wider text-center transition-colors flex items-center justify-center gap-1.5"
+                  className="w-full py-3.5 rounded-full bg-[#087A5B] hover:bg-[#07503F] text-[#FAF8F2] dark:bg-[#00A878] dark:text-white text-xs font-semibold uppercase tracking-wider text-center transition-colors flex items-center justify-center gap-1.5 shadow-xs"
                 >
                   <span>Get SAFORA</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -129,7 +133,7 @@ export default function Navbar({ onOpenScanner }) {
                       setOpen(false);
                       onOpenScanner();
                     }}
-                    className="w-full py-2.5 rounded-full bg-black/[0.04] dark:bg-white/[0.04] border border-black/10 dark:border-white/10 text-xs font-mono uppercase tracking-wider text-[#4A544E] dark:text-slate-300 hover:text-emerald-700 dark:hover:text-white"
+                    className="w-full py-2.5 rounded-full bg-[#FAF8F2] dark:bg-white/[0.04] border border-[#D9D6CD] dark:border-white/10 text-xs font-mono uppercase tracking-wider text-[#5E665F] dark:text-[#9BA7A0] hover:text-[#087A5B] dark:hover:text-[#00A878]"
                   >
                     Open Live URL Scanner
                   </button>

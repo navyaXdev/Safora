@@ -12,6 +12,7 @@ import ProductMessage from '@/components/safora/ProductMessage';
 import CTA from '@/components/safora/CTA';
 import Footer from '@/components/safora/Footer';
 import LiveScannerDemo from '@/components/LiveScannerDemo';
+import CustomCursor from '@/components/CustomCursor';
 
 import { ThemeProvider } from '@/context/ThemeContext';
 
@@ -30,51 +31,57 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <div className="relative min-h-screen bg-[#F7F7F2] text-[#121614] dark:bg-[#050706] dark:text-slate-200 selection:bg-emerald-500/20 selection:text-emerald-400 overflow-x-hidden transition-colors duration-400">
-      {/* Sticky Luxury Navbar */}
-      <Navbar onOpenScanner={handleOpenScanner} />
+      <div className="relative min-h-screen bg-[#F0EEE7] text-[#171B18] dark:bg-[#070908] dark:text-[#F3F2EC] selection:bg-[#087A5B]/20 selection:text-[#087A5B] dark:selection:bg-[#00A878]/25 dark:selection:text-[#00A878] overflow-x-hidden transition-colors duration-400">
+        {/* Desktop Luxury Precision Cursor */}
+        <CustomCursor />
 
-      <main>
-        {/* Hero Section */}
-        <Hero onOpenScanner={handleOpenScanner} />
+        {/* Tactile Micro-Texture Overlay */}
+        <div className="fixed inset-0 pointer-events-none opacity-[0.035] dark:opacity-[0.035] bg-[radial-gradient(#171B18_1px,transparent_1px)] dark:bg-[radial-gradient(#F3F2EC_1px,transparent_1px)] [background-size:28px_28px] z-[1]" />
 
-        {/* About SAFORA */}
-        <About />
+        {/* Sticky Luxury Navbar */}
+        <Navbar onOpenScanner={handleOpenScanner} />
 
-        {/* Why SAFORA */}
-        <WhySafora />
+        <main className="relative z-[2]">
+          {/* Hero Section */}
+          <Hero onOpenScanner={handleOpenScanner} />
 
-        {/* Features */}
-        <Features onOpenScanner={handleOpenScanner} />
+          {/* About SAFORA */}
+          <About />
 
-        {/* How It Works */}
-        <HowItWorks onOpenScanner={handleOpenScanner} />
+          {/* Why SAFORA */}
+          <WhySafora />
 
-        {/* Risk Levels */}
-        <RiskLevels />
+          {/* Features */}
+          <Features onOpenScanner={handleOpenScanner} />
 
-        {/* Who Is It For */}
-        <WhoIsItFor />
+          {/* How It Works */}
+          <HowItWorks onOpenScanner={handleOpenScanner} />
 
-        {/* Team Section (Photo-Ready) */}
-        <Team />
+          {/* Risk Levels */}
+          <RiskLevels />
 
-        {/* Product Message */}
-        <ProductMessage />
+          {/* Who Is It For */}
+          <WhoIsItFor />
 
-        {/* Call to Action */}
-        <CTA onExplore={() => scrollToSection('about')} />
-      </main>
+          {/* Team Section (Photo-Ready) */}
+          <Team />
 
-      {/* Footer */}
-      <Footer />
+          {/* Product Message */}
+          <ProductMessage />
 
-      {/* Interactive Live URL Scanner Tool Modal */}
-      <LiveScannerDemo
-        isOpen={scannerOpen}
-        onClose={handleCloseScanner}
-      />
-    </div>
+          {/* Call to Action */}
+          <CTA onExplore={() => scrollToSection('about')} />
+        </main>
+
+        {/* Footer */}
+        <Footer />
+
+        {/* Interactive Live URL Scanner Tool Modal */}
+        <LiveScannerDemo
+          isOpen={scannerOpen}
+          onClose={handleCloseScanner}
+        />
+      </div>
     </ThemeProvider>
   );
 }
