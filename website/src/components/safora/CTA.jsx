@@ -11,9 +11,9 @@ export default function CTA({ onExplore }) {
   };
 
   return (
-    <section id="cta" className="relative py-36 sm:py-48 overflow-hidden border-t border-black/[0.06] dark:border-white/[0.06] bg-[#F7F7F2] dark:bg-[#050706] transition-colors duration-400">
+    <section id="cta" className="relative py-36 sm:py-48 overflow-hidden border-t border-black/[0.06] dark:border-white/[0.06] bg-[#FAF9F5] dark:bg-[#050706] transition-colors duration-400">
       <div className="absolute inset-0 grid-bg radial-fade opacity-30 pointer-events-none" />
-      <motion.div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full bg-emerald-600/[0.06] dark:bg-emerald-700/[0.07] blur-[150px] animate-aurora pointer-events-none" />
+      <motion.div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full bg-emerald-600/[0.05] dark:bg-emerald-700/[0.07] blur-[150px] animate-aurora pointer-events-none" />
 
       <div className="relative max-w-2xl mx-auto px-6 sm:px-10 text-center">
         <Reveal>
@@ -22,16 +22,16 @@ export default function CTA({ onExplore }) {
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-white dark:bg-[#090c0a] mb-10 overflow-hidden ring-1 ring-black/10 dark:ring-white/10 shadow-[0_15px_35px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_45px_rgba(0,0,0,0.8)]"
+            className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-white dark:bg-[#090c0a] mb-10 overflow-hidden ring-1 ring-black/10 dark:ring-white/10 shadow-[0_15px_35px_rgba(20,25,22,0.06)] dark:shadow-[0_20px_45px_rgba(0,0,0,0.8)]"
           >
             <img src={LOGO_URL} alt="SAFORA logo" className="h-11 w-11 object-cover" />
           </motion.div>
 
-          <h2 className="font-serif text-4xl sm:text-5xl lg:text-[3.5rem] leading-[1.08] tracking-[-0.02em] text-[#121614] dark:text-white font-normal">
+          <h2 className="font-serif text-4xl sm:text-5xl lg:text-[3.5rem] leading-[1.08] tracking-[-0.02em] text-[#141916] dark:text-white font-normal">
             Browse smarter with SAFORA.
           </h2>
 
-          <p className="mt-6 text-base sm:text-lg text-[#4e5952] dark:text-slate-300 leading-[1.9] font-light max-w-md mx-auto">
+          <p className="mt-6 text-base sm:text-lg text-[#4A544E] dark:text-slate-300 leading-[1.9] font-light max-w-md mx-auto">
             Stay aware. Understand the warning. Make safer choices online.
           </p>
 
@@ -57,7 +57,7 @@ export default function CTA({ onExplore }) {
             </button>
           </div>
 
-          <div className="mt-10 text-xs font-mono text-emerald-600 dark:text-emerald-400/80 font-medium">
+          <div className="mt-10 text-xs font-mono text-emerald-700 dark:text-emerald-400 font-medium">
             "You're protected now."
           </div>
         </Reveal>

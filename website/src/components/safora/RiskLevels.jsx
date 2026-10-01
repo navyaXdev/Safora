@@ -33,13 +33,13 @@ const levels = [
 
 export default function RiskLevels() {
   return (
-    <section id="risk-levels" className="relative py-36 sm:py-44 bg-[#F7F7F2] dark:bg-[#050706] transition-colors duration-400 overflow-hidden">
+    <section id="risk-levels" className="relative py-36 sm:py-44 bg-[#FAF9F5] dark:bg-[#050706] transition-colors duration-400 overflow-hidden">
       <div className="relative max-w-[1400px] mx-auto px-6 sm:px-10">
         
         <Reveal>
           <div className="max-w-2xl mx-auto text-center">
             <Eyebrow>Risk Levels</Eyebrow>
-            <h2 className="mt-8 font-serif text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.08] tracking-[-0.02em] text-[#121614] dark:text-white">
+            <h2 className="mt-8 font-serif text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.08] tracking-[-0.02em] text-[#141916] dark:text-white">
               Understand the warning at a glance.
             </h2>
           </div>
@@ -57,7 +57,7 @@ export default function RiskLevels() {
                   viewport={{ once: true }}
                   transition={{ duration: 1.0, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
                   className="flex-1 h-[3px] rounded-full origin-left"
-                  style={{ backgroundColor: l.color, opacity: 0.8 }}
+                  style={{ backgroundColor: l.color, opacity: 0.85 }}
                 />
               ))}
             </div>
@@ -83,7 +83,7 @@ export default function RiskLevels() {
               <motion.div
                 whileHover={{ y: -6 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="group h-full bg-white dark:bg-[#090c0a]/90 rounded-[28px] p-8 border border-black/[0.07] dark:border-white/[0.07] shadow-sm dark:shadow-md transition-all duration-400"
+                className="group h-full bg-white dark:bg-[#090e0b]/90 rounded-[28px] p-8 border border-black/[0.07] dark:border-white/[0.07] shadow-[0_10px_25px_rgba(20,25,22,0.03)] dark:shadow-md transition-all duration-400"
               >
                 <div
                   className="w-11 h-11 rounded-2xl flex items-center justify-center mb-8"
@@ -99,7 +99,7 @@ export default function RiskLevels() {
                   {l.label}
                 </h3>
                 
-                <p className="text-xs sm:text-sm text-[#4e5952] dark:text-slate-300 leading-[1.85] font-light">
+                <p className="text-xs sm:text-sm text-[#4A544E] dark:text-slate-300 leading-[1.85] font-light">
                   {l.text}
                 </p>
               </motion.div>
@@ -109,8 +109,8 @@ export default function RiskLevels() {
 
         {/* Mandatory Disclaimer */}
         <Reveal delay={0.2}>
-          <div className="mt-16 p-4 rounded-2xl bg-[#F4F5F0] dark:bg-white/[0.02] border border-black/[0.06] dark:border-white/[0.06] max-w-xl mx-auto text-center shadow-xs">
-            <p className="text-xs text-[#5e6b62] dark:text-slate-400 leading-[1.85] font-light font-mono">
+          <div className="mt-16 p-4 rounded-2xl bg-[#F3F2EC] dark:bg-white/[0.02] border border-black/[0.06] dark:border-white/[0.06] max-w-xl mx-auto text-center shadow-xs">
+            <p className="text-xs text-[#55635B] dark:text-slate-400 leading-[1.85] font-light font-mono">
               SAFORA provides risk indicators to help you make informed decisions. It does not guarantee that a website is completely safe or dangerous.
             </p>
           </div>

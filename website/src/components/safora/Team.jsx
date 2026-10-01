@@ -65,13 +65,13 @@ const team = [
 
 export default function Team() {
   return (
-    <section id="team" className="relative py-36 sm:py-44 bg-[#F7F7F2] dark:bg-[#050706] transition-colors duration-400">
+    <section id="team" className="relative py-36 sm:py-44 bg-[#FAF9F5] dark:bg-[#050706] transition-colors duration-400">
       <div className="relative max-w-[1400px] mx-auto px-6 sm:px-10">
         
         <Reveal>
           <div className="max-w-2xl mx-auto text-center">
             <Eyebrow>Team</Eyebrow>
-            <h2 className="mt-8 font-serif text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.08] tracking-[-0.02em] text-[#121614] dark:text-white">
+            <h2 className="mt-8 font-serif text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.08] tracking-[-0.02em] text-[#141916] dark:text-white">
               Meet the people behind SAFORA
             </h2>
           </div>
@@ -84,25 +84,26 @@ export default function Team() {
               <motion.div
                 whileHover={{ y: -8 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="group h-full rounded-[28px] border border-black/[0.07] dark:border-white/[0.07] hover:border-emerald-500/40 bg-white dark:bg-[#080b09]/80 overflow-hidden transition-all duration-400 shadow-sm dark:shadow-md backdrop-blur-2xl flex flex-col justify-between"
+                className="group h-full rounded-[28px] border border-black/[0.07] dark:border-white/[0.07] hover:border-emerald-500/40 bg-white dark:bg-[#080b09]/85 overflow-hidden transition-all duration-400 shadow-[0_12px_35px_rgba(20,25,22,0.04)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.6)] backdrop-blur-2xl flex flex-col justify-between"
               >
                 <div>
                   {/* Photo Container: Square Aspect Ratio & Clean Presentation */}
-                  <div className="relative aspect-square overflow-hidden bg-[#eeeee8] dark:bg-[#0c100e] border-b border-black/[0.06] dark:border-white/[0.06] flex items-center justify-center">
+                  <div className="relative aspect-square overflow-hidden bg-[#EAE8E1] dark:bg-[#0c100e] border-b border-black/[0.06] dark:border-white/[0.06] flex items-center justify-center">
                     {m.image ? (
                       <img
                         src={m.image}
                         alt={m.name}
                         loading="lazy"
+                        decoding="async"
                         className={`w-full h-full object-cover ${m.objectPosition || 'object-center'} group-hover:scale-105 transition-transform duration-500 will-change-transform`}
                       />
                     ) : (
                       /* Abstract intentional placeholder */
-                      <div className="relative w-full h-full flex flex-col items-center justify-center p-6 text-[#6e7b73] dark:text-slate-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-300 transition-colors">
+                      <div className="relative w-full h-full flex flex-col items-center justify-center p-6 text-[#6e7b73] dark:text-slate-400 group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors">
                         <div className="absolute inset-6 rounded-full border border-black/[0.04] dark:border-white/[0.04] group-hover:border-emerald-500/20 group-hover:rotate-45 transition-all duration-700 pointer-events-none" />
                         <div className="absolute inset-12 rounded-full border border-black/[0.03] dark:border-white/[0.03] pointer-events-none" />
                         
-                        <div className="w-16 h-16 rounded-2xl bg-white/80 dark:bg-white/[0.03] border border-black/10 dark:border-white/[0.08] flex items-center justify-center text-[#2d3630] dark:text-slate-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-300 group-hover:scale-105 transition-all duration-300 shadow-sm">
+                        <div className="w-16 h-16 rounded-2xl bg-white/80 dark:bg-white/[0.03] border border-black/10 dark:border-white/[0.08] flex items-center justify-center text-[#2d3630] dark:text-slate-300 group-hover:text-emerald-700 dark:group-hover:text-emerald-300 group-hover:scale-105 transition-all duration-300 shadow-xs">
                           <User className="w-7 h-7 stroke-[1.4]" />
                         </div>
 
@@ -112,20 +113,20 @@ export default function Team() {
                       </div>
                     )}
 
-                    <div className="absolute top-3.5 right-3.5 w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400/70" />
+                    <div className="absolute top-3.5 right-3.5 w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400/80 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
                   </div>
 
                   {/* Details: NAME, ROLE & DESCRIPTION */}
                   <div className="p-6 pb-2">
-                    <h3 className="font-serif text-lg font-bold tracking-tight text-[#121614] dark:text-white mb-1.5 group-hover:text-emerald-600 dark:group-hover:text-emerald-300 transition-colors">
+                    <h3 className="font-serif text-xl font-bold tracking-tight text-[#141916] dark:text-white mb-1.5 group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors">
                       {m.name}
                     </h3>
                     
-                    <div className="text-[10px] font-mono uppercase tracking-[0.14em] font-semibold text-emerald-600 dark:text-emerald-400 mb-3">
+                    <div className="text-[10px] font-mono uppercase tracking-[0.16em] font-semibold text-emerald-700 dark:text-emerald-400 mb-3">
                       {m.role}
                     </div>
 
-                    <p className="text-xs text-[#5e6b62] dark:text-slate-400 leading-relaxed font-normal">
+                    <p className="text-xs text-[#55635B] dark:text-slate-300 leading-relaxed font-normal">
                       {m.description}
                     </p>
                   </div>
@@ -139,7 +140,7 @@ export default function Team() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${m.name}'s GitHub profile`}
-                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-[11px] font-mono font-medium text-[#2d3630] dark:text-slate-300 bg-black/[0.03] dark:bg-white/[0.03] hover:bg-emerald-500/10 dark:hover:bg-emerald-500/15 border border-black/[0.08] dark:border-white/[0.08] hover:border-emerald-500/40 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all duration-300 cursor-pointer shadow-xs group/btn"
+                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-[11px] font-mono font-medium text-[#2d3630] dark:text-slate-300 bg-black/[0.03] dark:bg-white/[0.03] hover:bg-emerald-500/10 dark:hover:bg-emerald-500/15 border border-black/[0.08] dark:border-white/[0.08] hover:border-emerald-500/40 hover:text-emerald-700 dark:hover:text-emerald-300 transition-all duration-300 cursor-pointer shadow-xs group/btn"
                     >
                       <GithubIcon className="w-3.5 h-3.5 shrink-0" />
                       <span>GitHub</span>
@@ -151,7 +152,7 @@ export default function Team() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${m.name}'s LinkedIn profile`}
-                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-[11px] font-mono font-medium text-[#2d3630] dark:text-slate-300 bg-black/[0.03] dark:bg-white/[0.03] hover:bg-emerald-500/10 dark:hover:bg-emerald-500/15 border border-black/[0.08] dark:border-white/[0.08] hover:border-emerald-500/40 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all duration-300 cursor-pointer shadow-xs group/btn"
+                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-[11px] font-mono font-medium text-[#2d3630] dark:text-slate-300 bg-black/[0.03] dark:bg-white/[0.03] hover:bg-emerald-500/10 dark:hover:bg-emerald-500/15 border border-black/[0.08] dark:border-white/[0.08] hover:border-emerald-500/40 hover:text-emerald-700 dark:hover:text-emerald-300 transition-all duration-300 cursor-pointer shadow-xs group/btn"
                     >
                       <LinkedinIcon className="w-3.5 h-3.5 shrink-0" />
                       <span>LinkedIn</span>

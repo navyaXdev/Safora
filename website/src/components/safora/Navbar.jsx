@@ -27,7 +27,7 @@ export default function Navbar({ onOpenScanner }) {
       transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "backdrop-blur-2xl bg-[#F7F7F2]/90 dark:bg-[#050706]/85 border-b border-black/[0.06] dark:border-white/[0.06] shadow-[0_10px_30px_rgba(0,0,0,0.04)] dark:shadow-[0_10px_30px_rgba(0,0,0,0.7)] py-3.5"
+          ? "backdrop-blur-2xl bg-[#FAF9F5]/90 dark:bg-[#050706]/85 border-b border-black/[0.06] dark:border-white/[0.06] shadow-[0_10px_30px_rgba(20,25,22,0.04)] dark:shadow-[0_10px_30px_rgba(0,0,0,0.7)] py-3.5"
           : "bg-transparent py-5 border-b border-transparent"
       }`}
     >
@@ -35,9 +35,9 @@ export default function Navbar({ onOpenScanner }) {
         {/* Brand / Logo */}
         <button
           onClick={() => go("#home")}
-          className="group flex items-center gap-3.5 transition-transform duration-300 cursor-pointer"
+          className="group flex items-center gap-3.5 transition-transform duration-300 cursor-pointer focus-visible:outline-none"
         >
-          <div className="relative w-8 h-8 rounded-xl overflow-hidden ring-1 ring-black/10 dark:ring-white/10 group-hover:ring-emerald-500/50 transition-all shadow-sm">
+          <div className="relative w-8 h-8 rounded-xl overflow-hidden ring-1 ring-black/10 dark:ring-white/10 group-hover:ring-emerald-500/60 transition-all shadow-xs">
             <img
               src={LOGO_URL}
               alt="SAFORA logo"
@@ -45,22 +45,22 @@ export default function Navbar({ onOpenScanner }) {
             />
           </div>
           <div className="flex flex-col text-left">
-            <span className="font-serif text-lg font-bold tracking-tight text-[#121614] dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-300 transition-colors">
+            <span className="font-serif text-xl font-bold tracking-tight text-[#141916] dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors">
               SAFORA
             </span>
-            <span className="text-[9px] uppercase font-mono tracking-[0.25em] text-emerald-600 dark:text-emerald-400/80 -mt-1 hidden sm:block">
+            <span className="text-[9px] uppercase font-mono tracking-[0.25em] text-emerald-700 dark:text-emerald-400 -mt-1 hidden sm:block font-medium">
               Web Protection
             </span>
           </div>
         </button>
 
         {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center gap-8 px-6 py-2 rounded-full bg-black/[0.03] dark:bg-[#0a0d0b]/60 border border-black/[0.06] dark:border-white/[0.06] backdrop-blur-xl">
+        <div className="hidden lg:flex items-center gap-8 px-6 py-2 rounded-full bg-black/[0.03] dark:bg-[#090e0b]/70 border border-black/[0.06] dark:border-white/[0.06] backdrop-blur-xl">
           {NAV_LINKS.map((link) => (
             <button
               key={link.href}
               onClick={() => go(link.href)}
-              className="text-[11px] uppercase tracking-[0.22em] text-[#4e5952] hover:text-[#121614] dark:text-slate-300 dark:hover:text-white transition-colors duration-200 cursor-pointer"
+              className="text-[11px] uppercase tracking-[0.22em] text-[#4A544E] hover:text-[#141916] dark:text-[#9BAAA0] dark:hover:text-white transition-colors duration-200 cursor-pointer font-medium"
             >
               {link.label}
             </button>
@@ -84,7 +84,7 @@ export default function Navbar({ onOpenScanner }) {
 
           <button
             onClick={() => setOpen(!open)}
-            className="lg:hidden p-2 text-[#121614] dark:text-slate-300 hover:text-emerald-600 dark:hover:text-white rounded-xl bg-black/[0.04] dark:bg-white/[0.04] border border-black/10 dark:border-white/10"
+            className="lg:hidden p-2 text-[#141916] dark:text-slate-200 hover:text-emerald-600 dark:hover:text-white rounded-xl bg-black/[0.04] dark:bg-white/[0.04] border border-black/10 dark:border-white/10"
             aria-label="Toggle menu"
           >
             {open ? <X className="w-5 h-5" strokeWidth={1.5} /> : <Menu className="w-5 h-5" strokeWidth={1.5} />}
@@ -100,14 +100,14 @@ export default function Navbar({ onOpenScanner }) {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:hidden overflow-hidden backdrop-blur-2xl bg-[#F7F7F2]/95 dark:bg-[#070908]/95 border-t border-black/10 dark:border-white/10 shadow-2xl"
+            className="lg:hidden overflow-hidden backdrop-blur-2xl bg-[#FAF9F5]/98 dark:bg-[#070a08]/98 border-t border-black/10 dark:border-white/10 shadow-2xl"
           >
             <div className="px-6 py-6 flex flex-col space-y-1">
               {NAV_LINKS.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => go(link.href)}
-                  className="py-3 text-left text-xs uppercase tracking-[0.22em] text-[#4e5952] dark:text-slate-300 hover:text-[#121614] dark:hover:text-white transition-colors"
+                  className="py-3 text-left text-xs uppercase tracking-[0.22em] text-[#4A544E] dark:text-slate-300 hover:text-[#141916] dark:hover:text-white transition-colors font-medium"
                 >
                   {link.label}
                 </button>
@@ -129,7 +129,7 @@ export default function Navbar({ onOpenScanner }) {
                       setOpen(false);
                       onOpenScanner();
                     }}
-                    className="w-full py-2.5 rounded-full bg-black/[0.04] dark:bg-white/[0.04] border border-black/10 dark:border-white/10 text-xs font-mono uppercase tracking-wider text-[#4e5952] dark:text-slate-300 hover:text-emerald-600 dark:hover:text-white"
+                    className="w-full py-2.5 rounded-full bg-black/[0.04] dark:bg-white/[0.04] border border-black/10 dark:border-white/10 text-xs font-mono uppercase tracking-wider text-[#4A544E] dark:text-slate-300 hover:text-emerald-700 dark:hover:text-white"
                   >
                     Open Live URL Scanner
                   </button>

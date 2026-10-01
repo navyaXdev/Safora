@@ -8,12 +8,12 @@ export default function Hero({ onOpenScanner }) {
   const go = (id) => document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <section id="home" className="relative min-h-[95vh] flex items-center pt-36 pb-28 overflow-hidden bg-[#F7F7F2] dark:bg-[#050706] transition-colors duration-400">
+    <section id="home" className="relative min-h-[95vh] flex items-center pt-36 pb-28 overflow-hidden bg-[#FAF9F5] dark:bg-[#050706] transition-colors duration-400">
       {/* Editorial backdrop accents */}
       <div className="absolute inset-0 grid-bg radial-fade opacity-30 pointer-events-none" />
-      <div className="absolute -top-48 left-[20%] w-[700px] h-[700px] rounded-full bg-emerald-600/[0.05] dark:bg-emerald-700/[0.08] blur-[170px] animate-aurora pointer-events-none" />
-      <div className="absolute -bottom-36 right-[5%] w-[600px] h-[600px] rounded-full bg-emerald-700/[0.04] dark:bg-emerald-900/[0.12] blur-[160px] animate-aurora pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-[#F7F7F2] dark:to-[#050706] pointer-events-none" />
+      <div className="absolute -top-48 left-[20%] w-[700px] h-[700px] rounded-full bg-emerald-600/[0.04] dark:bg-emerald-700/[0.07] blur-[170px] animate-aurora pointer-events-none" />
+      <div className="absolute -bottom-36 right-[5%] w-[600px] h-[600px] rounded-full bg-emerald-700/[0.03] dark:bg-emerald-900/[0.1] blur-[160px] animate-aurora pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-[#FAF9F5] dark:to-[#050706] pointer-events-none" />
 
       <div className="relative max-w-[1400px] mx-auto px-6 sm:px-10 w-full grid lg:grid-cols-12 gap-16 lg:gap-12 items-center">
         
@@ -27,19 +27,19 @@ export default function Hero({ onOpenScanner }) {
             <Eyebrow align="left">Real-Time Web Protection</Eyebrow>
 
             {/* High-Contrast Editorial Serif Headline */}
-            <h1 className="mt-8 font-serif text-[3.1rem] sm:text-6xl lg:text-[4.4rem] xl:text-[5.1rem] leading-[1.01] tracking-[-0.03em] text-[#121614] dark:text-white font-normal">
+            <h1 className="mt-8 font-serif text-[2.75rem] xs:text-5xl sm:text-6xl lg:text-[4.2rem] xl:text-[5rem] leading-[1.02] tracking-[-0.03em] text-[#141916] dark:text-white font-normal">
               Browse with
               <br />
-              <span className="italic font-normal text-emerald-600 dark:text-emerald-400">
+              <span className="italic font-normal text-emerald-700 dark:text-emerald-400">
                 confidence.
               </span>
             </h1>
 
-            <p className="mt-8 text-lg sm:text-xl text-[#3d4741] dark:text-slate-200 font-light leading-relaxed max-w-md">
+            <p className="mt-7 text-base sm:text-xl text-[#333D37] dark:text-slate-200 font-light leading-relaxed max-w-md">
               SAFORA helps you spot suspicious websites before they become a problem.
             </p>
 
-            <p className="mt-4 text-sm sm:text-[15px] text-[#5e6b62] dark:text-slate-400 leading-relaxed max-w-md font-light">
+            <p className="mt-3.5 text-xs sm:text-[15px] text-[#55635B] dark:text-slate-400 leading-relaxed max-w-md font-light">
               Your everyday browsing deserves an extra layer of protection. SAFORA helps identify potentially risky websites and gives you clear, easy-to-understand warnings.
             </p>
 
@@ -56,10 +56,10 @@ export default function Hero({ onOpenScanner }) {
               </a>
               
               <button
-                onClick={() => go("#features")}
+                onClick={() => onOpenScanner ? onOpenScanner() : go("#how-it-works")}
                 className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-white dark:bg-white/[0.04] text-[#2d3630] dark:text-slate-300 hover:text-emerald-700 dark:hover:text-white text-[11px] uppercase tracking-[0.2em] font-medium border border-black/10 dark:border-white/10 hover:border-emerald-500/40 transition-all duration-500 shadow-sm cursor-pointer"
               >
-                Explore Features
+                See How It Works
               </button>
             </div>
           </motion.div>
@@ -91,15 +91,15 @@ function BrowserVisual({ onAction }) {
       <div className="relative rounded-[30px] overflow-hidden bg-white dark:bg-[#090c0a]/90 border border-black/[0.08] dark:border-white/[0.08] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.08)] dark:shadow-[0_30px_70px_-20px_rgba(0,0,0,0.85)] transition-all duration-400">
         
         {/* Browser Chrome Header */}
-        <div className="flex items-center gap-4 px-6 py-4 border-b border-black/[0.06] dark:border-white/[0.06] bg-[#F4F5F0] dark:bg-[#070a08]/80 transition-colors">
+        <div className="flex items-center gap-4 px-6 py-4 border-b border-black/[0.06] dark:border-white/[0.06] bg-[#F3F2EC] dark:bg-[#070a08]/80 transition-colors">
           <div className="flex gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-black/15 dark:bg-white/[0.12]" />
             <span className="w-2.5 h-2.5 rounded-full bg-black/15 dark:bg-white/[0.12]" />
             <span className="w-2.5 h-2.5 rounded-full bg-black/15 dark:bg-white/[0.12]" />
           </div>
           
-          <div className="flex-1 flex items-center justify-center gap-2.5 px-4 py-1.5 rounded-full bg-white dark:bg-white/[0.03] border border-black/[0.06] dark:border-white/[0.06] max-w-sm mx-auto shadow-sm">
-            <Lock className="w-3 h-3 text-[#5e6b62] dark:text-slate-400" strokeWidth={1.5} />
+          <div className="flex-1 flex items-center justify-center gap-2.5 px-4 py-1.5 rounded-full bg-white dark:bg-white/[0.03] border border-black/[0.06] dark:border-white/[0.06] max-w-sm mx-auto shadow-xs">
+            <Lock className="w-3 h-3 text-[#55635B] dark:text-slate-400" strokeWidth={1.5} />
             <span className="text-[11px] font-mono text-[#2d3630] dark:text-slate-300 truncate">example-login.com</span>
           </div>
 
@@ -109,7 +109,7 @@ function BrowserVisual({ onAction }) {
         </div>
 
         {/* Inner Security Card */}
-        <div className="relative p-8 sm:p-11 bg-white/95 dark:bg-[#090c0a]/90 transition-colors">
+        <div className="relative p-8 sm:p-11 bg-white/98 dark:bg-[#090c0a]/90 transition-colors">
           {/* Subtle scanning beam */}
           <div className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent animate-scan pointer-events-none" />
 
@@ -191,10 +191,10 @@ function BrowserVisual({ onAction }) {
               &ldquo;This website may be trying to imitate a trusted service.&rdquo;
             </p>
             
-            <div className="mt-7 flex items-center gap-3">
+            <div className="mt-7 flex flex-col sm:flex-row sm:items-center gap-3.5">
               <button
                 onClick={onAction}
-                className="inline-flex items-center gap-2 px-7 py-3 rounded-full text-xs font-semibold tracking-wider uppercase text-white bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 border border-emerald-400/30 shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full text-xs font-semibold tracking-wider uppercase text-white bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 border border-emerald-400/30 shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all cursor-pointer"
               >
                 <ShieldCheck className="w-4 h-4 text-emerald-100" strokeWidth={1.5} />
                 <span>See How It Works</span>
@@ -214,11 +214,11 @@ function BrowserVisual({ onAction }) {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.4, duration: 1.0 }}
-        className="absolute -bottom-5 -left-5 bg-white dark:bg-[#090c0a] rounded-2xl px-5 py-3.5 flex items-center gap-3 shadow-lg dark:shadow-xl border border-black/[0.08] dark:border-white/[0.08]"
+        className="hidden sm:flex absolute -bottom-4 -left-4 bg-white dark:bg-[#090c0a] rounded-2xl px-5 py-3.5 items-center gap-3 shadow-lg dark:shadow-xl border border-black/[0.08] dark:border-white/[0.08]"
       >
         <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" strokeWidth={1.5} />
         <div>
-          <p className="text-xs font-medium text-[#121614] dark:text-white tracking-wide">You're protected</p>
+          <p className="text-xs font-medium text-[#141916] dark:text-white tracking-wide">You're protected</p>
           <p className="text-[9px] uppercase font-mono tracking-[0.24em] text-emerald-700 dark:text-emerald-400/80">by SAFORA</p>
         </div>
       </motion.div>

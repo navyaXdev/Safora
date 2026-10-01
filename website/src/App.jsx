@@ -48,7 +48,7 @@ export default function App() {
         <Features onOpenScanner={handleOpenScanner} />
 
         {/* How It Works */}
-        <HowItWorks />
+        <HowItWorks onOpenScanner={handleOpenScanner} />
 
         {/* Risk Levels */}
         <RiskLevels />
